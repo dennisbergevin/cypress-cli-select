@@ -30,7 +30,7 @@ Thanks for being willing to contribute!
 Please make sure to run the node script to inspect behavior before you commit your changes:
 
 ```bash
-npx cypress-plugin-cli-select run
+npx cypress-cli-select run
 ```
 
 ## Help needed

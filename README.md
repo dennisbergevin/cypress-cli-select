@@ -110,6 +110,6 @@ For more information on Typescript support involved with `@bahmutov/cy-grep` pac
 
 ## Contributions
 
-Feel free to open a pull request or drop any feature request or bug in the [issues](https://github.com/dennisbergevin/cypress-plugin-last-failed/issues).
+Feel free to open a pull request or drop any feature request or bug in the [issues](https://github.com/dennisbergevin/cypress-cli-select/issues).
 
 Please see more details in the [contributing doc](./CONTRIBUTING.md).
