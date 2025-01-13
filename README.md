@@ -92,7 +92,7 @@ npx cypress-cli-select run --component --browser=chrome
 
 ### Specify a custom cypress config directory
 
-This cli utilizes the cypress-find-specs package. For more information on specifying a custom path to a cypress.config, see [ custom-config-filename ](https://github.com/bahmutov/find-cypress-specs?tab=readme-ov-file#custom-config-filename).
+This cli utilizes the [ cypress-find-specs ](https://github.com/bahmutov/find-cypress-specs) package. For more information on specifying a custom path to a cypress.config, see [ custom-config-filename ](https://github.com/bahmutov/find-cypress-specs?tab=readme-ov-file#custom-config-filename).
 
 ```bash
 # Example
