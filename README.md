@@ -6,6 +6,8 @@
 Cypress interactive cli prompts to select and run spec(s) and test(s).
 </p>
 
+![Cypress-cli-select animated](./assets/cypress-cli-select-animated.gif)
+
 ![Cypress-cli-select demo 1](./assets/cypress-cli-select-demo1.png)
 
 ![Cypress-cli-select demo 2](./assets/cypress-cli-select-demo2.png)
