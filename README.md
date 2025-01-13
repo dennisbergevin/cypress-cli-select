@@ -24,7 +24,7 @@ Cypress interactive cli prompts to select and run spec(s) and test(s).
 - [📦 Installation](#-installation)
 - [✋ Help mode](#-help-mode)
 - [👟 Run mode](#-run-mode)
-  - [Specify a custom cypress.config directory]()
+  - [Specify a custom cypress.config directory](#specify-a-custom-cypress.config-directory)
   - [📃 Setting up a `npm` script](#-setting-up-a-npm-script)
 - [Typescript support](#typescript-support)
 - [Contributions](#contributions)
