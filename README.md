@@ -61,7 +61,7 @@ To open the cli help menu, add `--help` flag:
 npx cypress-cli-select run --help
 ```
 
-![Cypress cli select help menu](./assets/cypress-cli-select-help-demo.png)
+![Cypress cli select help menu](./assets/cypress-cli-select-help.png)
 
 ---
 
