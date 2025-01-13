@@ -3,12 +3,16 @@
 </p>
 
 <p align="center">
-A Cypress cli interface to select and run spec(s) and test(s).
+Cypress interactive cli prompts to select and run spec(s) and test(s).
 </p>
+
+![Cypress-cli-select demo 1](./assets/cypress-cli-select-demo1.png)
+
+![Cypress-cli-select demo 2](./assets/cypress-cli-select-demo2.png)
 
 ## Features
 
-- ⌨ A new CLI interface to select and run spec(s) and/or test(s)
+- ⌨ New interactive CLI prompts to select and run spec(s) and/or test(s)
 - 👟 A new `cypress run` command to allow user to pass desired arguments
 
 #### Table of Contents
@@ -57,7 +61,7 @@ To open the cli help menu, add `--help` flag:
 npx cypress-cli-select run --help
 ```
 
-![Cypress cli select help menu](./assets/cypress-cli-select-help.png)
+![Cypress cli select help menu](./assets/cypress-cli-select-help-demo.png)
 
 ---
 

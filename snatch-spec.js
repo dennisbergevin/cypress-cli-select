@@ -111,9 +111,8 @@ async function runSelectedSpecs() {
         value: "Specs",
       },
       {
-        name: "Test titles",
+        name: "Test titles (requires cy-grep)",
         value: "Tests",
-        description: "Requires cy-grep package",
       },
     ],
     required: true,
@@ -176,21 +175,20 @@ async function runSelectedSpecs() {
         });
 
         if (specAndTestPrompt.includes("Tests")) {
-          process.env.CYPRESS_grepExtraSpecs = sortedSpecResult;
+          process.env.CYPRESS_grepExtraSpecs = sortedSpecResult.toString();
         } else {
+          function specString() {
+            let stringedSpecs = "";
+            sortedSpecResult.forEach((spec) => {
+              specArr.push(`"${spec}"`);
+              stringedSpecs += `"${spec}", `;
+            });
+            return stringedSpecs.slice(0, -2);
+          }
           if (process.env.TESTING_TYPE === "e2e") {
             process.argv.push("--config");
-            process.argv.push(`specPattern=[${sortedSpecResult}]`);
+            process.argv.push(`specPattern=[${specString()}]`);
           } else {
-            function specString() {
-              let stringedSpecs = "";
-              sortedSpecResult.forEach((spec) => {
-                specArr.push(`"${spec}"`);
-                stringedSpecs += `"${spec}", `;
-              });
-              return stringedSpecs.slice(0, -2);
-            }
-
             // TODO: Current component test specPattern workaround
             // See: https://github.com/cypress-io/cypress/issues/29317
             process.argv.push("--config");
@@ -201,7 +199,7 @@ async function runSelectedSpecs() {
         }
       } else {
         if (specAndTestPrompt.includes("Tests")) {
-          process.env.CYPRESS_grepExtraSpecs = sortedSpecResult;
+          process.env.CYPRESS_grepExtraSpecs = specSelections.toString();
         } else {
           process.argv.push(`--spec=${specSelections.toString()}`);
         }
