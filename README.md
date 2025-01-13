@@ -90,7 +90,7 @@ You can also include more cli arguments similar to `cypress run`, as the command
 npx cypress-cli-select run --component --browser=chrome
 ```
 
-### Specify a custom test-results directory
+### Specify a custom cypress.config directory
 
 This cli interface utilizes the cypress-find-specs package. For more information on specifying a custom path to a cypress.config, see [ custom-config-filename ](https://github.com/bahmutov/find-cypress-specs?tab=readme-ov-file#custom-config-filename).
 
