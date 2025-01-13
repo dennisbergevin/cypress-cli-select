@@ -101,7 +101,6 @@ CYPRESS_CONFIG_FILE=path/to/cypress.config.js npx cypress-cli-select run
 
 This environment variable will direct this package to look for spec files specified in the config file path.
 
-````
 ### 📃 Setting up a `npm` script
 
 For convenience, you may desire to house the `npx` command within an npm script in your project's `package.json`, including any desired cli arguments:
@@ -110,7 +109,7 @@ For convenience, you may desire to house the `npx` command within an npm script 
   "scripts": {
     "cy:select": "npx cypress-cli-select --browser=firefox"
   }
-````
+```
 
 ## Typescript support
 
