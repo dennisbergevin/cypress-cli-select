@@ -10,10 +10,10 @@
     "cypress": "^13.17.0"
   },
   "dependencies": {
-    "@bahmutov/cy-grep": "^2.0.2",
+    "@bahmutov/cy-grep": "^2.0.4",
     "@inquirer/core": "^10.1.2",
-    "find-cypress-specs": "^1.46.4",
-    "find-test-names": "^1.29.1",
+    "find-cypress-specs": "^1.46.5",
+    "find-test-names": "^1.29.2",
     "fuse.js": "^7.0.0",
     "inquirer-select-pro": "^1.0.0-alpha.9",
     "picocolors": "^1.1.1",

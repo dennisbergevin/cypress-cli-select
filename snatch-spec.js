@@ -11,6 +11,8 @@ const pc = require("picocolors");
 const fs = require("fs");
 const path = require("path");
 
+// Used when walking the getTestNames array of objects with nested suites
+// Grabs spec name, parent suite names, and test title
 function iterateObject(obj, arr, continuedArr) {
   if (obj.tests.length > 0) {
     if (obj.tests.length === 1 && obj.suites.length === 0) {
@@ -33,6 +35,7 @@ function iterateObject(obj, arr, continuedArr) {
   }
 }
 
+// Used to remove a process argument before executing Cypress run
 function findAndRemoveArgv(arg) {
   const argToRemove = arg;
   const index = process.argv.indexOf(argToRemove);
@@ -41,6 +44,8 @@ function findAndRemoveArgv(arg) {
   }
 }
 
+// Retrieves Cypress spec files using getSpecs
+// For each spec file, use getTestNames to walk the test array of objects
 const suitesTests = () => {
   const specs = getSpecs(
     process.env.CYPRESS_CONFIG_FILE,
@@ -101,6 +106,7 @@ async function runSelectedSpecs() {
     process.env.TESTING_TYPE = "e2e";
   }
 
+  // Prompt for use to select spec and/or test titles option
   const specAndTestPrompt = await select({
     message: "Choose to filter by specs and/or specific test titles",
     multiple: true,
@@ -118,6 +124,8 @@ async function runSelectedSpecs() {
     required: true,
   });
 
+  // Arrays for storing specs and/or tests selectedTests
+  // If user passes --print-selected
   const specArr = [];
   const testArr = [];
 
@@ -167,6 +175,11 @@ async function runSelectedSpecs() {
         },
       });
 
+      // If user passes --print-selected, print the specs selected
+      specSelections.forEach((spec) => {
+        specArr.push(`${spec}`);
+      });
+
       if (process.argv.includes("--choose-spec-pattern")) {
         findAndRemoveArgv("--choose-spec-pattern");
         const sortedSpecResult = await sortingList({
@@ -174,9 +187,18 @@ async function runSelectedSpecs() {
           choices: specSelections,
         });
 
+        // If user passes --print-selected, empty array storing specs and print re-ordered
+        specArr.length = 0;
+
+        sortedSpecResult.forEach((spec) => {
+          specArr.push(`${spec}`);
+        });
+
         if (specAndTestPrompt.includes("Tests")) {
+          // For more info on grepExtraSpecs: https://github.com/bahmutov/cy-grep?tab=readme-ov-file#grepextraspecs
           process.env.CYPRESS_grepExtraSpecs = sortedSpecResult.toString();
         } else {
+          // Translate to specPattern string format to be used for Cypress run command line
           function specString() {
             let stringedSpecs = "";
             sortedSpecResult.forEach((spec) => {
@@ -245,6 +267,8 @@ async function runSelectedSpecs() {
         return arr;
       };
 
+      // Sets up the test select prompt formatted spec > parent(s) > test
+      // All selected tests will then remove the ">" separator for use in @bahmutov/cy-grep to run test titles
       const separateStringJson = () => {
         let arr = [];
         const specs = testChoices();
@@ -282,6 +306,8 @@ async function runSelectedSpecs() {
         },
       });
 
+      // Format the tests selected into a string separated by colon
+      // This is the test title grep string format used by @bahmutov/cy-grep package
       function formatGrepString() {
         let stringedTests = "";
         selectedTests.forEach((test) => {
@@ -293,6 +319,7 @@ async function runSelectedSpecs() {
 
       const stringedTests = formatGrepString();
 
+      // Set the process.env for @bahmutov/cy-grep package using CYPRESS_*
       process.env.CYPRESS_grep = `${stringedTests}`;
       process.env.CYPRESS_grepFilterSpecs = true;
       process.env.CYPRESS_grepOmitFiltered = true;
