@@ -138,11 +138,6 @@ async function runSelectedSpecs() {
 
     if (specs.length > 0) {
       function specsChoices() {
-        const specs = getSpecs(
-          process.env.CYPRESS_CONFIG_FILE,
-          process.env.TESTING_TYPE,
-          false,
-        );
         let arr = [];
         specs.forEach((element) => {
           const spec = {
