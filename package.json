@@ -1,7 +1,7 @@
 {
   "name": "cypress-cli-select",
   "version": "1.0.0",
-  "description": "A Cypress cli interface to select and run spec(s) and test(s)",
+  "description": "A Cypress cli prompt to select and run spec(s) and test(s)",
   "main": "snatch-spec.js",
   "bin": {
     "cypress-cli-select": "snatch-spec.js"
@@ -9,6 +9,25 @@
   "devDependencies": {
     "cypress": "^13.17.0"
   },
+  "keywords": [
+    "cypress",
+    "testing",
+    "cli",
+    "tooling"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "author": "Dennis Bergevin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dennisbergevin/cypress-cli-select.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dennisbergevin/cypress-cli-select/issues"
+  },
+  "homepage": "https://github.com/dennisbergevin/cypress-cli-select#readme",
   "dependencies": {
     "@bahmutov/cy-grep": "^2.0.4",
     "@inquirer/core": "^10.1.2",
