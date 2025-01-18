@@ -218,7 +218,8 @@ async function runSelectedSpecs() {
         if (specAndTestPrompt.includes("Tests")) {
           process.env.CYPRESS_grepExtraSpecs = specSelections.toString();
         } else {
-          process.argv.push(`--spec=${specSelections.toString()}`);
+          process.argv.push(`--spec`);
+          process.argv.push(`${specSelections.join().toString()}`);
         }
       }
     } else {
@@ -284,6 +285,7 @@ async function runSelectedSpecs() {
       const selectedTests = await select({
         message: "Select tests to run",
         multiple: true,
+        required: true,
         clearInputWhenSelected: true,
         options: (input = "") => {
           const tests = separateStringJson();
