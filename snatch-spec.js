@@ -11,26 +11,33 @@ const pc = require("picocolors");
 const fs = require("fs");
 const path = require("path");
 
+const skippedArr = [];
+
 // Used when walking the getTestNames array of objects with nested suites
 // Grabs spec name, parent suite names, and test title
-function iterateObject(obj, arr, continuedArr) {
+function iterateObject(obj, arr, continuedArr, skippedArr) {
   if (obj.tests.length > 0) {
-    if (obj.tests.length === 1 && obj.suites.length === 0) {
-      obj.tests.forEach((test) => {
-        arr[arr.length - 1].push(test.name);
-      });
-    } else {
-      obj.tests.forEach((test) => {
+    obj.tests.forEach((test) => {
+      if (test.pending === false) {
         let newArr = [...continuedArr, test.name];
         arr.push(newArr);
-      });
-    }
+      } else {
+        let newArr = [...continuedArr, test.name];
+        skippedArr.push(newArr);
+      }
+    });
   }
   if (obj.suites.length > 0) {
     obj.suites.forEach((suite) => {
-      let newArr = [...continuedArr, suite.name];
-      arr.push(newArr);
-      iterateObject(suite, arr, newArr);
+      if (suite.pending === false) {
+        console.log(suite);
+
+        let newArr = [...continuedArr, suite.name];
+        iterateObject(suite, arr, newArr);
+      } else {
+        let newArr = [...continuedArr, suite.name];
+        skippedArr.push(newArr);
+      }
     });
   }
 }
@@ -52,6 +59,7 @@ const suitesTests = () => {
     process.env.TESTING_TYPE,
     false,
   );
+
   let arr = [];
 
   specs.forEach((element) => {
@@ -61,9 +69,17 @@ const suitesTests = () => {
 
     tests.structure.forEach((struct) => {
       const baseDepthArr = [`${specFile}`, `${struct.name}`];
-      arr.push(baseDepthArr);
+      // filter out empty suites
+      if (struct.type === "test" && struct.pending === false) {
+        arr.push(baseDepthArr);
+      } else if (struct.pending === true) {
+        skippedArr.push(baseDepthArr);
+      }
 
-      iterateObject(struct, arr, baseDepthArr);
+      // only walk nested structure for suites
+      if (struct.type != "test") {
+        iterateObject(struct, arr, baseDepthArr, skippedArr);
+      }
     });
   });
 
@@ -71,10 +87,6 @@ const suitesTests = () => {
 };
 
 async function runSelectedSpecs() {
-  console.log("\n");
-  console.log(pc.bgGreen(pc.black(pc.bold(` Cypress-cli-select `))));
-  console.log("\n");
-
   yarg
     .completion("--print-selected", false)
     .option("print-selected", {
@@ -82,6 +94,14 @@ async function runSelectedSpecs() {
       type: "boolean",
     })
     .example("npx cypress-cli-select run --print-selected");
+
+  yarg
+    .completion("--print-skipped", false)
+    .option("print-skipped", {
+      desc: "Prints all skipped spec(s) and test(s)",
+      type: "boolean",
+    })
+    .example("npx cypress-cli-select run --print-skipped");
 
   yarg
     .completion("--choose-spec-pattern", false)
@@ -105,6 +125,24 @@ async function runSelectedSpecs() {
   } else {
     process.env.TESTING_TYPE = "e2e";
   }
+
+  if (process.argv.includes("--print-skipped")) {
+    suitesTests();
+    const modifiedArr = [];
+    console.log("\n");
+    console.log(pc.bgGreen(pc.black(pc.bold(` Skipped Suites/Tests: `))));
+    console.log("\n");
+    skippedArr.forEach((skip) => {
+      let modified = skip.flat().join(" > ");
+      modifiedArr.push(modified);
+      console.log(modifiedArr);
+    }),
+      process.exit();
+  }
+
+  console.log("\n");
+  console.log(pc.bgGreen(pc.black(pc.bold(` Cypress-cli-select `))));
+  console.log("\n");
 
   // Prompt for use to select spec and/or test titles option
   const specAndTestPrompt = await select({
@@ -153,7 +191,6 @@ async function runSelectedSpecs() {
         message: "Select specs to run",
         multiple: true,
         canToggleAll: true,
-        clearInputWhenSelected: true,
         options: (input = "") => {
           const specs = specsChoices();
 
@@ -286,7 +323,6 @@ async function runSelectedSpecs() {
         message: "Select tests to run",
         multiple: true,
         required: true,
-        clearInputWhenSelected: true,
         options: (input = "") => {
           const tests = separateStringJson();
 

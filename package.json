@@ -29,9 +29,9 @@
   },
   "homepage": "https://github.com/dennisbergevin/cypress-cli-select#readme",
   "dependencies": {
-    "@bahmutov/cy-grep": "^2.0.4",
+    "@bahmutov/cy-grep": "^2.0.5",
     "@inquirer/core": "^10.1.2",
-    "find-cypress-specs": "^1.46.5",
+    "find-cypress-specs": "^1.47.0",
     "find-test-names": "^1.29.2",
     "fuse.js": "^7.0.0",
     "inquirer-select-pro": "^1.0.0-alpha.9",
