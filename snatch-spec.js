@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-const { getSpecs } = require("find-cypress-specs");
+const { getSpecs, getTests } = require("find-cypress-specs");
+const { jsonResults } = getTests();
 const cypress = require("cypress");
 const Fuse = require("fuse.js");
 const { select } = require("inquirer-select-pro");
@@ -11,35 +12,19 @@ const pc = require("picocolors");
 const fs = require("fs");
 const path = require("path");
 
-const skippedArr = [];
-const onlyArr = [];
-
 // Used when walking the getTestNames array of objects with nested suites
 // Grabs spec name, parent suite names, and test title
-function iterateObject(obj, arr, continuedArr, skippedArr, onlyArr) {
+function iterateObject(obj, arr, continuedArr) {
   if (obj.tests.length > 0) {
     obj.tests.forEach((test) => {
-      if (test.pending === false && !test.exclusive) {
-        let newArr = [...continuedArr, test.name];
-        arr.push(newArr);
-      } else if (test.pending === true) {
-        let newArr = [...continuedArr, test.name];
-        skippedArr.push(newArr);
-      } else if (test.exclusive) {
-        let newArr = [...continuedArr, test.name];
-        onlyArr.push(newArr);
-      }
+      let newArr = [...continuedArr, test.name];
+      arr.push(newArr);
     });
   }
   if (obj.suites.length > 0) {
     obj.suites.forEach((suite) => {
-      if (suite.pending === false) {
-        let newArr = [...continuedArr, suite.name];
-        iterateObject(suite, arr, newArr);
-      } else if (suite.pending === true) {
-        let newArr = [...continuedArr, suite.name];
-        skippedArr.push(newArr);
-      }
+      let newArr = [...continuedArr, suite.name];
+      iterateObject(suite, arr, newArr);
     });
   }
 }
@@ -77,38 +62,17 @@ const suitesTests = () => {
         !struct.exclusive
       ) {
         arr.push(baseDepthArr);
-      } else if (struct.pending === true) {
-        skippedArr.push(baseDepthArr);
-      } else if (struct.exclusive) {
-        onlyArr.push(baseDepthArr);
       }
 
       // only walk nested structure for suites
       if (struct.type != "test") {
-        iterateObject(struct, arr, baseDepthArr, skippedArr, onlyArr);
+        iterateObject(struct, arr, baseDepthArr);
       }
     });
   });
 
   return arr;
 };
-
-function printSpecials(arr, label, err) {
-  const modifiedArr = [];
-  console.log("\n");
-  console.log(pc.bgGreen(pc.black(pc.bold(` ${label} `))));
-  console.log("\n");
-  if (arr.length > 0) {
-    arr.forEach((item) => {
-      let modified = item.flat().join(" > ");
-      modifiedArr.push(modified);
-      console.log(modifiedArr);
-    });
-    console.log("\n");
-  } else {
-    console.log(pc.redBright(pc.bold(err)));
-  }
-}
 
 async function runSelectedSpecs() {
   yarg
@@ -118,22 +82,6 @@ async function runSelectedSpecs() {
       type: "boolean",
     })
     .example("npx cypress-cli-select run --print-selected");
-
-  yarg
-    .completion("--print-skipped", false)
-    .option("print-skipped", {
-      desc: "Prints all skipped spec(s) and test(s)",
-      type: "boolean",
-    })
-    .example("npx cypress-cli-select run --print-skipped");
-
-  yarg
-    .completion("--print-only", false)
-    .option("print-only", {
-      desc: "Prints all test(s) with .only",
-      type: "boolean",
-    })
-    .example("npx cypress-cli-select run --print-only");
 
   yarg
     .completion("--choose-spec-pattern", false)
@@ -156,26 +104,6 @@ async function runSelectedSpecs() {
     process.env.TESTING_TYPE = "component";
   } else {
     process.env.TESTING_TYPE = "e2e";
-  }
-
-  if (
-    process.argv.includes("--print-skipped") ||
-    process.argv.includes("--print-only")
-  ) {
-    suitesTests();
-    if (process.argv.includes("--print-skipped")) {
-      findAndRemoveArgv("--print-skipped");
-      printSpecials(
-        skippedArr,
-        "Skipped Suites/Tests:",
-        "No skipped suites/tests found",
-      );
-    }
-
-    if (process.argv.includes("--print-only")) {
-      findAndRemoveArgv("--print-only");
-      printSpecials(onlyArr, "Tests with .only", "No test(s) with .only found");
-    }
   }
 
   console.log("\n");
@@ -228,6 +156,7 @@ async function runSelectedSpecs() {
       const specSelections = await select({
         message: "Select specs to run",
         multiple: true,
+        required: true,
         canToggleAll: true,
         options: (input = "") => {
           const specs = specsChoices();
@@ -423,7 +352,32 @@ async function runSelectedSpecs() {
     const runOptions = await cypress.cli.parseRunArguments(
       process.argv.slice(2),
     );
-    await cypress.run(runOptions);
+    await cypress.run(runOptions).then((results) => {
+      results.runs.forEach((tests) => {
+        const filteredSpec = Object.fromEntries(
+          Object.entries(jsonResults).filter(
+            ([key]) => key === tests.spec.relative,
+          ),
+        );
+        if (tests.stats.tests !== Object.values(filteredSpec)[0].counts.tests) {
+          console.log("\n");
+          console.log(
+            pc.yellow(
+              pc.bold(
+                `Total tests in ${tests.spec.name}: ${JSON.stringify(Object.values(filteredSpec)[0].counts.tests)}`,
+              ),
+            ),
+          );
+          console.log(
+            pc.yellow(
+              pc.bold(
+                `Total run tests in ${tests.spec.name}: ${tests.stats.tests}`,
+              ),
+            ),
+          );
+        }
+      });
+    });
   }
 }
 
