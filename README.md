@@ -135,13 +135,21 @@ npx cypress-cli-select run --choose-spec-pattern
 
 ## 🖨 Print selected
 
-If you want to simply print all selected spec(s) and/or test(s) without running them, pass the following flag:
+If you want to print all selected spec(s) and/or test(s) just prior to Cypress run, pass the following flag:
 
 ```bash
 npx cypress-cli-select run --print-selected
 ```
 
 ![Cypress cli select --print-selected](./assets/print-selected-demo.png)
+
+## Test diff output
+
+At the end of the Cypress run, if the total tests in a spec file is not equal to the number of tests run from that spec file, you will see an output similar to the following:
+
+![Cypress diff output demo](./assets/output-demo.png)
+
+---
 
 ## 🎯 Specify a custom cypress config directory
 
@@ -154,6 +162,8 @@ CYPRESS_CONFIG_FILE=path/to/cypress.config.js npx cypress-cli-select run
 
 This environment variable will direct this package to look for spec files specified in the config file path.
 
+---
+
 ## 📃 Setting up a `npm` script
 
 For convenience, you may desire to house the `npx` command within an npm script in your project's `package.json`, including any desired cli arguments:
@@ -164,9 +174,13 @@ For convenience, you may desire to house the `npx` command within an npm script 
   }
 ```
 
+---
+
 ## 🚧 Typescript support
 
 For more information on Typescript support involved with `@bahmutov/cy-grep` package, refer to it's [README](https://github.com/bahmutov/cy-grep?tab=readme-ov-file#typescript-support).
+
+---
 
 ## 🤝 Contributions
 

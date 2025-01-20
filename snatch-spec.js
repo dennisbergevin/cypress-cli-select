@@ -369,7 +369,7 @@ async function runSelectedSpecs() {
         );
         console.log(
           pc.bold(
-            ` Total run tests in ${tests.spec.name}: ${tests.stats.tests} `,
+            ` Number of ran tests in ${tests.spec.name}: ${tests.stats.tests} `,
           ),
         );
       }
