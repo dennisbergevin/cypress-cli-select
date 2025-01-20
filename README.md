@@ -24,10 +24,14 @@ Cypress interactive cli prompts to select and run spec(s) and test(s).
 - [📦 Installation](#-installation)
 - [✋ Help mode](#-help-mode)
 - [👟 Run mode](#-run-mode)
-  - [Specify a custom cypress.config directory](#specify-a-custom-cypress-config-directory)
-  - [📃 Setting up a `npm` script](#-setting-up-a-npm-script)
-- [Typescript support](#typescript-support)
-- [Contributions](#contributions)
+  - [Keyboard controls](#keyboard-controls)
+- [🫵 Choose spec pattern](#-choose-spec-pattern)
+  - [Keyboard controls](#keyboard-controls)
+- [🖨 Print selected](#-print-selected)
+- [🎯 Specify a custom cypress.config directory](#-specify-a-custom-cypress-config-directory)
+- [📃 Setting up a `npm` script](#-setting-up-a-npm-script)
+- [🚧 Typescript support](#-typescript-support)
+- [🤝 Contributions](#-contributions)
 
 ---
 
@@ -90,7 +94,7 @@ You can also include more cli arguments similar to `cypress run`, as the command
 npx cypress-cli-select run --component --browser=chrome
 ```
 
-### General keyboard controls
+### Keyboard controls
 
 |              Keys              |             Action              |
 | :----------------------------: | :-----------------------------: |
@@ -104,7 +108,9 @@ npx cypress-cli-select run --component --browser=chrome
 
 **Note**: You can also filter choices displayed in list by typing
 
-## `--choose-spec-pattern`
+---
+
+## 🫵 Choose spec pattern
 
 If you are interested in running selected specs in a specific order, pass the following flag:
 
@@ -112,7 +118,7 @@ If you are interested in running selected specs in a specific order, pass the fo
 npx cypress-cli-select run --choose-spec-pattern
 ```
 
-### `--choose-spec-pattern` keyboard controls
+### Keyboard controls
 
 |               Keys               |             Action              |
 | :------------------------------: | :-----------------------------: |
@@ -125,7 +131,9 @@ npx cypress-cli-select run --choose-spec-pattern
 
 ![Cypress cli select --choose-spec-pattern](./assets/choose-spec-pattern-demo.gif)
 
-## `--print-selected`
+---
+
+## 🖨 Print selected
 
 If you want to simply print all selected spec(s) and/or test(s) without running them, pass the following flag:
 
@@ -135,7 +143,7 @@ npx cypress-cli-select run --print-selected
 
 ![Cypress cli select --print-selected](./assets/print-selected-demo.png)
 
-### Specify a custom cypress config directory
+## 🎯 Specify a custom cypress config directory
 
 This cli utilizes the [ cypress-find-specs ](https://github.com/bahmutov/find-cypress-specs) package. For more information on specifying a custom path to a cypress.config, see [ custom-config-filename ](https://github.com/bahmutov/find-cypress-specs?tab=readme-ov-file#custom-config-filename).
 
@@ -146,21 +154,21 @@ CYPRESS_CONFIG_FILE=path/to/cypress.config.js npx cypress-cli-select run
 
 This environment variable will direct this package to look for spec files specified in the config file path.
 
-### 📃 Setting up a `npm` script
+## 📃 Setting up a `npm` script
 
 For convenience, you may desire to house the `npx` command within an npm script in your project's `package.json`, including any desired cli arguments:
 
 ```json
   "scripts": {
-    "cy:select": "npx cypress-cli-select --browser=firefox"
+    "cy:select": "npx cypress-cli-select run --browser=firefox"
   }
 ```
 
-## Typescript support
+## 🚧 Typescript support
 
 For more information on Typescript support involved with `@bahmutov/cy-grep` package, refer to it's [README](https://github.com/bahmutov/cy-grep?tab=readme-ov-file#typescript-support).
 
-## Contributions
+## 🤝 Contributions
 
 Feel free to open a pull request or drop any feature request or bug in the [issues](https://github.com/dennisbergevin/cypress-cli-select/issues).
 

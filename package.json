@@ -18,6 +18,9 @@
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
+  "scripts": {
+    "test": "npx cypress-cli-select run"
+  },
   "author": "Dennis Bergevin",
   "license": "MIT",
   "repository": {
