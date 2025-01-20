@@ -126,8 +126,8 @@ npx cypress-cli-select run --choose-spec-pattern
 |         <kbd>Down</kbd>          | Move to selection below current |
 | <kbd>Shift</kbd> + <kbd>⬆</kbd> |       Reorder current up        |
 | <kbd>Shift</kbd> + <kbd>⬇</kbd> |      Reorder current down       |
-|         <kbd>Enter</kbd>         |        Confirm re-order         |
-|        <kbd>Escape</kbd>         |     Cancel re-order changes     |
+|         <kbd>Enter</kbd>         |      Proceed with re-order      |
+|        <kbd>Escape</kbd>         |   Proceed with original order   |
 
 ![Cypress cli select --choose-spec-pattern](./assets/choose-spec-pattern-demo.gif)
 
