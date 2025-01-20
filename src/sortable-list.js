@@ -11,10 +11,6 @@ const {
 } = require("@inquirer/core");
 const pc = require("picocolors");
 
-function isEscapeKey(key) {
-  return key.name === "escape";
-}
-
 export const sortingList = createPrompt((config, done) => {
   const { message, choices, pageSize = 10 } = config;
   const theme = makeTheme({
@@ -27,16 +23,13 @@ export const sortingList = createPrompt((config, done) => {
 
   const [items, setItems] = useState(choices);
   const [active, setActive] = useState(0);
-  const originalOrder = [...choices]; // Store the original order for escape
 
   if (items.length === 0) {
     return `${prefix.idle} ${message}\n(No items to display)`;
   }
 
   useKeypress((key) => {
-    if (isEscapeKey(key)) {
-      done(originalOrder); // Exit without changes
-    } else if (isEnterKey(key)) {
+    if (isEnterKey(key)) {
       setStatus("done");
       done(items);
     } else if (isUpKey(key) || isDownKey(key)) {
@@ -80,7 +73,7 @@ export const sortingList = createPrompt((config, done) => {
   if (status === "done") {
     return `${theme.prefix.idle} ${pc.bold(message)} ${pc.cyan(items).toString()}`;
   }
-  const helpermessage = `(use arrow keys to navigate, shift+up/down to reorder, enter to confirm, escape to cancel)`;
+  const helpermessage = `(use arrow keys to navigate, shift+up/down to reorder, enter to confirm)`;
   return `${theme.prefix.idle} ${pc.bold(message)}\n${page}\n${pc.dim(
     helpermessage,
   )}`;

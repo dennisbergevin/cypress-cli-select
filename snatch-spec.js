@@ -201,7 +201,6 @@ async function runSelectedSpecs() {
           function specString() {
             let stringedSpecs = "";
             sortedSpecResult.forEach((spec) => {
-              specArr.push(`"${spec}"`);
               stringedSpecs += `"${spec}", `;
             });
             return stringedSpecs.slice(0, -2);
