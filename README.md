@@ -57,7 +57,7 @@ Follow the installation and setup for `@bahmutov/cy-grep` in the project [README
 
 ## ✋ Help mode
 
-To open the cli help menu, add `--help` flag:
+To open the cli help menu, pass the `--help` flag:
 
 ```bash
 npx cypress-cli-select run --help
@@ -89,6 +89,51 @@ You can also include more cli arguments similar to `cypress run`, as the command
 # Example
 npx cypress-cli-select run --component --browser=chrome
 ```
+
+### General keyboard controls
+
+|              Keys              |             Action              |
+| :----------------------------: | :-----------------------------: |
+|         <kbd>Up</kbd>          | Move to selection above current |
+|        <kbd>Down</kbd>         | Move to selection below current |
+|         <kbd>Tab</kbd>         |         Select current          |
+| <kbd>Ctrl</kbd> + <kbd>a</kbd> |           Select all            |
+|      <kbd>Backspace</kbd>      |        Remove selection         |
+|        <kbd>Enter</kbd>        |             Proceed             |
+| <kbd>Ctrl</kbd> + <kbd>c</kbd> |              Exit               |
+
+**Note**: You can also filter choices displayed in list by typing
+
+## `--choose-spec-pattern`
+
+If you are interested in running selected specs in a specific order, pass the following flag:
+
+```bash
+npx cypress-cli-select run --choose-spec-pattern
+```
+
+### `--choose-spec-pattern` keyboard controls
+
+|               Keys               |             Action              |
+| :------------------------------: | :-----------------------------: |
+|          <kbd>Up</kbd>           | Move to selection above current |
+|         <kbd>Down</kbd>          | Move to selection below current |
+| <kbd>Shift</kbd> + <kbd>⬆</kbd> |       Reorder current up        |
+| <kbd>Shift</kbd> + <kbd>⬇</kbd> |      Reorder current down       |
+|         <kbd>Enter</kbd>         |          Confirm order          |
+|        <kbd>Escape</kbd>         |             Cancel              |
+
+![Cypress cli select --choose-spec-pattern](./assets/choose-spec-pattern-demo.gif)
+
+## `--print-selected`
+
+If you want to simply print all selected spec(s) and/or test(s) without running them, pass the following flag:
+
+```bash
+npx cypress-cli-select run --print-selected
+```
+
+![Cypress cli select --print-selected](./assets/print-selected-demo.png)
 
 ### Specify a custom cypress config directory
 
