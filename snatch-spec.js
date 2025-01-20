@@ -12,29 +12,31 @@ const fs = require("fs");
 const path = require("path");
 
 const skippedArr = [];
+const onlyArr = [];
 
 // Used when walking the getTestNames array of objects with nested suites
 // Grabs spec name, parent suite names, and test title
-function iterateObject(obj, arr, continuedArr, skippedArr) {
+function iterateObject(obj, arr, continuedArr, skippedArr, onlyArr) {
   if (obj.tests.length > 0) {
     obj.tests.forEach((test) => {
-      if (test.pending === false) {
+      if (test.pending === false && !test.exclusive) {
         let newArr = [...continuedArr, test.name];
         arr.push(newArr);
-      } else {
+      } else if (test.pending === true) {
         let newArr = [...continuedArr, test.name];
         skippedArr.push(newArr);
+      } else if (test.exclusive) {
+        let newArr = [...continuedArr, test.name];
+        onlyArr.push(newArr);
       }
     });
   }
   if (obj.suites.length > 0) {
     obj.suites.forEach((suite) => {
       if (suite.pending === false) {
-        console.log(suite);
-
         let newArr = [...continuedArr, suite.name];
         iterateObject(suite, arr, newArr);
-      } else {
+      } else if (suite.pending === true) {
         let newArr = [...continuedArr, suite.name];
         skippedArr.push(newArr);
       }
@@ -69,22 +71,44 @@ const suitesTests = () => {
 
     tests.structure.forEach((struct) => {
       const baseDepthArr = [`${specFile}`, `${struct.name}`];
-      // filter out empty suites
-      if (struct.type === "test" && struct.pending === false) {
+      if (
+        struct.type === "test" &&
+        struct.pending === false &&
+        !struct.exclusive
+      ) {
         arr.push(baseDepthArr);
       } else if (struct.pending === true) {
         skippedArr.push(baseDepthArr);
+      } else if (struct.exclusive) {
+        onlyArr.push(baseDepthArr);
       }
 
       // only walk nested structure for suites
       if (struct.type != "test") {
-        iterateObject(struct, arr, baseDepthArr, skippedArr);
+        iterateObject(struct, arr, baseDepthArr, skippedArr, onlyArr);
       }
     });
   });
 
   return arr;
 };
+
+function printSpecials(arr, label, err) {
+  const modifiedArr = [];
+  console.log("\n");
+  console.log(pc.bgGreen(pc.black(pc.bold(` ${label} `))));
+  console.log("\n");
+  if (arr.length > 0) {
+    arr.forEach((item) => {
+      let modified = item.flat().join(" > ");
+      modifiedArr.push(modified);
+      console.log(modifiedArr);
+    });
+    console.log("\n");
+  } else {
+    console.log(pc.redBright(pc.bold(err)));
+  }
+}
 
 async function runSelectedSpecs() {
   yarg
@@ -102,6 +126,14 @@ async function runSelectedSpecs() {
       type: "boolean",
     })
     .example("npx cypress-cli-select run --print-skipped");
+
+  yarg
+    .completion("--print-only", false)
+    .option("print-only", {
+      desc: "Prints all test(s) with .only",
+      type: "boolean",
+    })
+    .example("npx cypress-cli-select run --print-only");
 
   yarg
     .completion("--choose-spec-pattern", false)
@@ -126,18 +158,24 @@ async function runSelectedSpecs() {
     process.env.TESTING_TYPE = "e2e";
   }
 
-  if (process.argv.includes("--print-skipped")) {
+  if (
+    process.argv.includes("--print-skipped") ||
+    process.argv.includes("--print-only")
+  ) {
     suitesTests();
-    const modifiedArr = [];
-    console.log("\n");
-    console.log(pc.bgGreen(pc.black(pc.bold(` Skipped Suites/Tests: `))));
-    console.log("\n");
-    skippedArr.forEach((skip) => {
-      let modified = skip.flat().join(" > ");
-      modifiedArr.push(modified);
-      console.log(modifiedArr);
-    }),
-      process.exit();
+    if (process.argv.includes("--print-skipped")) {
+      findAndRemoveArgv("--print-skipped");
+      printSpecials(
+        skippedArr,
+        "Skipped Suites/Tests:",
+        "No skipped suites/tests found",
+      );
+    }
+
+    if (process.argv.includes("--print-only")) {
+      findAndRemoveArgv("--print-only");
+      printSpecials(onlyArr, "Tests with .only", "No test(s) with .only found");
+    }
   }
 
   console.log("\n");
