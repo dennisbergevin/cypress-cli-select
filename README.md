@@ -149,6 +149,8 @@ At the end of the Cypress run, if the total tests in a spec file is not equal to
 
 ![Cypress diff output demo](./assets/output-demo.png)
 
+**Note**: Apart from indicating a grep test filtering was performed on a given spec during the Cypress run, this output is particularly helpful in detecting `.only()` as well
+
 ---
 
 ## Specify a custom cypress config directory
