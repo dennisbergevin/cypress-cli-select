@@ -21,21 +21,22 @@ Cypress interactive cli prompts to select and run spec(s) and test(s).
 
 - [Features](#features)
   - [Table of Contents](#table-of-contents)
-- [📦 Installation](#-installation)
-- [✋ Help mode](#-help-mode)
-- [👟 Run mode](#-run-mode)
+- [Installation](#-installation)
+- [Help mode](#-help-mode)
+- [Run mode](#-run-mode)
   - [Keyboard controls](#keyboard-controls)
-- [🫵 Choose spec pattern](#-choose-spec-pattern)
+- [Choose spec pattern](#-choose-spec-pattern)
   - [Keyboard controls](#keyboard-controls)
-- [🖨 Print selected](#-print-selected)
-- [🎯 Specify a custom cypress.config directory](#-specify-a-custom-cypress-config-directory)
-- [📃 Setting up a `npm` script](#-setting-up-a-npm-script)
-- [🚧 Typescript support](#-typescript-support)
-- [🤝 Contributions](#-contributions)
+- [Print selected](#-print-selected)
+- [Test diff output](#test-diff-output)
+- [Specify a custom cypress.config directory](#-specify-a-custom-cypress-config-directory)
+- [Setting up a `npm` script](#-setting-up-a-npm-script)
+- [Typescript support](#-typescript-support)
+- [Contributions](#-contributions)
 
 ---
 
-## 📦 Installation
+## Installation
 
 1. Install the following packages:
 
@@ -59,7 +60,7 @@ Follow the installation and setup for `@bahmutov/cy-grep` in the project [README
 
 ---
 
-## ✋ Help mode
+## Help mode
 
 To open the cli help menu, pass the `--help` flag:
 
@@ -71,7 +72,7 @@ npx cypress-cli-select run --help
 
 ---
 
-## 👟 Run mode
+## Run mode
 
 If you want to select e2e spec(s) to run, simply run the following command:
 
@@ -110,7 +111,7 @@ npx cypress-cli-select run --component --browser=chrome
 
 ---
 
-## 🫵 Choose spec pattern
+## Choose spec pattern
 
 If you are interested in running selected specs in a specific order, pass the following flag:
 
@@ -132,7 +133,7 @@ npx cypress-cli-select run --choose-spec-pattern
 
 ---
 
-## 🖨 Print selected
+## Print selected
 
 If you want to print all selected spec(s) and/or test(s) just prior to Cypress run, pass the following flag:
 
@@ -150,7 +151,7 @@ At the end of the Cypress run, if the total tests in a spec file is not equal to
 
 ---
 
-## 🎯 Specify a custom cypress config directory
+## Specify a custom cypress config directory
 
 This cli utilizes the [ cypress-find-specs ](https://github.com/bahmutov/find-cypress-specs) package. For more information on specifying a custom path to a cypress.config, see [ custom-config-filename ](https://github.com/bahmutov/find-cypress-specs?tab=readme-ov-file#custom-config-filename).
 
@@ -163,7 +164,7 @@ This environment variable will direct this package to look for spec files specif
 
 ---
 
-## 📃 Setting up a `npm` script
+## Setting up a `npm` script
 
 For convenience, you may desire to house the `npx` command within an npm script in your project's `package.json`, including any desired cli arguments:
 
@@ -175,13 +176,13 @@ For convenience, you may desire to house the `npx` command within an npm script 
 
 ---
 
-## 🚧 Typescript support
+## Typescript support
 
 For more information on Typescript support involved with `@bahmutov/cy-grep` package, refer to it's [README](https://github.com/bahmutov/cy-grep?tab=readme-ov-file#typescript-support).
 
 ---
 
-## 🤝 Contributions
+## Contributions
 
 Feel free to open a pull request or drop any feature request or bug in the [issues](https://github.com/dennisbergevin/cypress-cli-select/issues).
 
