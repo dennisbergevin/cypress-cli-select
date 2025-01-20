@@ -335,50 +335,46 @@ async function runSelectedSpecs() {
   }
 
   if (process.argv.includes("--print-selected")) {
+    findAndRemoveArgv("--print-selected");
     if (specAndTestPrompt.includes("Specs")) {
       console.log("\n");
       console.log(pc.bgGreen(pc.black(pc.bold(` Spec(s) selected: `))));
+      console.log("\n");
       console.log(specArr);
     }
     if (specAndTestPrompt.includes("Tests")) {
       console.log("\n");
       console.log(pc.bgGreen(pc.black(pc.bold(` Test(s) selected: `))));
+      console.log("\n");
       console.log(testArr);
     }
-    process.exit();
-  } else {
-    console.log("\n");
-    console.log(pc.bgGreen(pc.black(pc.bold(` Running Cypress: `))));
-    const runOptions = await cypress.cli.parseRunArguments(
-      process.argv.slice(2),
-    );
-    await cypress.run(runOptions).then((results) => {
-      results.runs.forEach((tests) => {
-        const filteredSpec = Object.fromEntries(
-          Object.entries(jsonResults).filter(
-            ([key]) => key === tests.spec.relative,
+  }
+
+  console.log("\n");
+  console.log(pc.bgGreen(pc.black(pc.bold(` Running Cypress: `))));
+  const runOptions = await cypress.cli.parseRunArguments(process.argv.slice(2));
+  await cypress.run(runOptions).then((results) => {
+    results.runs.forEach((tests) => {
+      const filteredSpec = Object.fromEntries(
+        Object.entries(jsonResults).filter(
+          ([key]) => key === tests.spec.relative,
+        ),
+      );
+      if (tests.stats.tests !== Object.values(filteredSpec)[0].counts.tests) {
+        console.log("\n");
+        console.log(
+          pc.bold(
+            ` Total tests in ${tests.spec.name}: ${JSON.stringify(Object.values(filteredSpec)[0].counts.tests)} `,
           ),
         );
-        if (tests.stats.tests !== Object.values(filteredSpec)[0].counts.tests) {
-          console.log("\n");
-          console.log(
-            pc.yellow(
-              pc.bold(
-                `Total tests in ${tests.spec.name}: ${JSON.stringify(Object.values(filteredSpec)[0].counts.tests)}`,
-              ),
-            ),
-          );
-          console.log(
-            pc.yellow(
-              pc.bold(
-                `Total run tests in ${tests.spec.name}: ${tests.stats.tests}`,
-              ),
-            ),
-          );
-        }
-      });
+        console.log(
+          pc.bold(
+            ` Total run tests in ${tests.spec.name}: ${tests.stats.tests} `,
+          ),
+        );
+      }
     });
-  }
+  });
 }
 
 runSelectedSpecs();
