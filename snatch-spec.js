@@ -350,6 +350,11 @@ async function runSelectedSpecs() {
     }
   }
 
+  // In case the user passes this option without selecting specs
+  if (process.argv.includes("--choose-spec-pattern")) {
+    findAndRemoveArgv("--choose-spec-pattern");
+  }
+
   console.log("\n");
   console.log(pc.bgGreen(pc.black(pc.bold(` Running Cypress: `))));
   const runOptions = await cypress.cli.parseRunArguments(process.argv.slice(2));
