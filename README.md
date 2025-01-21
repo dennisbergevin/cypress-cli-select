@@ -161,6 +161,8 @@ If you want to use a custom Cypress config, pass it via `--config-file` flag:
 npx cypress-cli-select run --config-file tests/cypress.config.js
 ```
 
+---
+
 ## Setting up a `npm` script
 
 For convenience, you may desire to house the `npx` command within an npm script in your project's `package.json`, including any desired cli arguments:
