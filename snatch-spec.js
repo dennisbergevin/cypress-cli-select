@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const { getSpecs, getTests } = require("find-cypress-specs");
-const { jsonResults } = getTests();
 const cypress = require("cypress");
 const Fuse = require("fuse.js");
 const { select } = require("inquirer-select-pro");
@@ -40,10 +39,12 @@ function findAndRemoveArgv(arg) {
   }
 }
 
+// Collect tags and requiredTags within suites and tests
 function collectTags(arr, tags, requiredTags) {
   if (tags) {
     if (Array.isArray(tags)) {
       tags.forEach((tag) => {
+        // filter out duplicates
         arr.indexOf(tag) === -1 ? arr.push(tag) : null;
       });
     } else {
@@ -65,11 +66,7 @@ function collectTags(arr, tags, requiredTags) {
 // Retrieves Cypress spec files using getSpecs
 // For each spec file, use getTestNames to walk the test array of objects
 const suitesTests = (justTags) => {
-  const specs = getSpecs(
-    process.env.CYPRESS_CONFIG_FILE,
-    process.env.TESTING_TYPE,
-    false,
-  );
+  const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
   let arr = [];
   let tagArr = [];
@@ -105,6 +102,11 @@ const suitesTests = (justTags) => {
 };
 
 async function runSelectedSpecs() {
+  if (process.argv.includes("--config-file")) {
+    const index = process.argv.indexOf("--config-file");
+    process.env.CYPRESS_CONFIG_FILE = process.argv[index + 1];
+  }
+
   try {
     yarg
       .completion("--print-selected", false)
@@ -137,6 +139,7 @@ async function runSelectedSpecs() {
       process.env.TESTING_TYPE = "e2e";
     }
 
+    // Cypress-cli-select title
     console.log("\n");
     console.log(pc.bgGreen(pc.black(pc.bold(` Cypress-cli-select `))));
     console.log("\n");
@@ -186,11 +189,7 @@ async function runSelectedSpecs() {
     const testArr = [];
 
     if (specAndTestPrompt.includes("Specs")) {
-      const specs = getSpecs(
-        process.env.CYPRESS_CONFIG_FILE,
-        process.env.TESTING_TYPE,
-        false,
-      );
+      const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
       if (specs.length > 0) {
         function specsChoices() {
@@ -288,11 +287,7 @@ async function runSelectedSpecs() {
     }
 
     if (process.env.CY_GREP_FILTER_METHOD === "Titles") {
-      const specs = getSpecs(
-        process.env.CYPRESS_CONFIG_FILE,
-        process.env.TESTING_TYPE,
-        false,
-      );
+      const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
       if (specs.length > 0) {
         const testChoices = () => {
@@ -382,11 +377,7 @@ async function runSelectedSpecs() {
     }
 
     if (process.env.CY_GREP_FILTER_METHOD === "Tags") {
-      const specs = getSpecs(
-        process.env.CYPRESS_CONFIG_FILE,
-        process.env.TESTING_TYPE,
-        false,
-      );
+      const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
       if (specs.length > 0) {
         const allTags = suitesTests(true);
@@ -489,8 +480,13 @@ async function runSelectedSpecs() {
     }
   }
 
+  const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
+  const { jsonResults } = getTests(specs);
+
   console.log("\n");
   console.log(pc.bgGreen(pc.black(pc.bold(` Running Cypress: `))));
+
+  // Executing the cypress run
   const runOptions = await cypress.cli.parseRunArguments(process.argv.slice(2));
   await cypress.run(runOptions).then((results) => {
     results.runs.forEach((tests) => {

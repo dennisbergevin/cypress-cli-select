@@ -29,6 +29,7 @@ Cypress interactive cli prompts to select and run spec(s) and test(s).
   - [Keyboard controls](#keyboard-controls)
 - [Print selected](#-print-selected)
 - [Test diff output](#test-diff-output)
+- [Using a custom cypress config](#using-a-custom-cypress-config)
 - [Setting up a `npm` script](#-setting-up-a-npm-script)
 - [Typescript support](#-typescript-support)
 - [Contributions](#-contributions)
@@ -151,6 +152,14 @@ At the end of the Cypress run, if the total tests in a spec file is not equal to
 **Note**: Apart from indicating a grep test filtering was performed on a given spec during the Cypress run, this output is particularly helpful in detecting `.only()` as well
 
 ---
+
+## Using a custom cypress config
+
+If you want to use a custom Cypress config, pass it via `--config-file` flag:
+
+```bash
+npx cypress-cli-select run --config-file tests/cypress.config.js
+```
 
 ## Setting up a `npm` script
 
