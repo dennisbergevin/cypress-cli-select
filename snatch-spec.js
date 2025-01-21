@@ -426,9 +426,7 @@ async function runSelectedSpecs() {
 
           process.env.SELECTED_TAGS = selectedTags;
 
-          // Format the tags selected into a string separated by space
           // This is the tag grep string format used by @bahmutov/cy-grep package
-
           // Set the process.env for @bahmutov/cy-grep package using CYPRESS_*
           process.env.CYPRESS_grepTags = `${process.env.SELECTED_TAGS}`;
         } else {
