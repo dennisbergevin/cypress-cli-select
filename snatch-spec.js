@@ -14,17 +14,19 @@ const path = require("path");
 
 // Used when walking the getTestNames array of objects with nested suites
 // Grabs spec name, parent suite names, and test title
-function iterateObject(obj, arr, continuedArr) {
+function iterateObject(obj, arr, continuedArr, tagsArr) {
   if (obj.tests.length > 0) {
     obj.tests.forEach((test) => {
+      collectTags(tagsArr, test.tags, test.requiredTags);
       let newArr = [...continuedArr, test.name];
       arr.push(newArr);
     });
   }
   if (obj.suites.length > 0) {
     obj.suites.forEach((suite) => {
+      collectTags(tagsArr, suite.tags, suite.requiredTags);
       let newArr = [...continuedArr, suite.name];
-      iterateObject(suite, arr, newArr);
+      iterateObject(suite, arr, newArr, tagsArr);
     });
   }
 }
@@ -38,9 +40,31 @@ function findAndRemoveArgv(arg) {
   }
 }
 
+function collectTags(arr, tags, requiredTags) {
+  if (tags) {
+    if (Array.isArray(tags)) {
+      tags.forEach((tag) => {
+        arr.indexOf(tag) === -1 ? arr.push(tag) : null;
+      });
+    } else {
+      arr.indexOf(tags) === -1 ? arr.push(tags) : null;
+    }
+  }
+
+  if (requiredTags) {
+    if (Array.isArray(requiredTags)) {
+      requiredTags.forEach((requiredTag) => {
+        arr.indexOf(requiredTag) === -1 ? arr.push(requiredTag) : null;
+      });
+    } else {
+      arr.indexOf(requiredTags) === -1 ? arr.push(requiredTags) : null;
+    }
+  }
+}
+
 // Retrieves Cypress spec files using getSpecs
 // For each spec file, use getTestNames to walk the test array of objects
-const suitesTests = () => {
+const suitesTests = (justTags) => {
   const specs = getSpecs(
     process.env.CYPRESS_CONFIG_FILE,
     process.env.TESTING_TYPE,
@@ -48,6 +72,7 @@ const suitesTests = () => {
   );
 
   let arr = [];
+  let tagArr = [];
 
   specs.forEach((element) => {
     const source = fs.readFileSync(element, "utf8");
@@ -64,14 +89,19 @@ const suitesTests = () => {
         arr.push(baseDepthArr);
       }
 
+      collectTags(tagArr, struct.tags, struct.requiredTags);
       // only walk nested structure for suites
       if (struct.type != "test") {
-        iterateObject(struct, arr, baseDepthArr);
+        iterateObject(struct, arr, baseDepthArr, tagArr);
       }
     });
   });
 
-  return arr;
+  if (justTags) {
+    return tagArr;
+  } else {
+    return arr;
+  }
 };
 
 async function runSelectedSpecs() {
@@ -111,10 +141,11 @@ async function runSelectedSpecs() {
     console.log(pc.bgGreen(pc.black(pc.bold(` Cypress-cli-select `))));
     console.log("\n");
 
-    // Prompt for use to select spec and/or test titles option
+    // Prompt for use to select spec and test titles or tags option
     const specAndTestPrompt = await select({
-      message: "Choose to filter by specs and/or specific test titles",
+      message: "Choose to filter by specs, specific test titles or tags: ",
       multiple: true,
+      clearInputWhenSelected: true,
       canToggleAll: true,
       options: [
         {
@@ -122,14 +153,34 @@ async function runSelectedSpecs() {
           value: "Specs",
         },
         {
-          name: "Test titles (requires cy-grep)",
-          value: "Tests",
+          name: "Test titles or tags (requires cy-grep)",
+          value: "Tests or tags",
         },
       ],
       required: true,
     });
 
-    // Arrays for storing specs and/or tests selectedTests
+    if (specAndTestPrompt.includes("Tests or tags")) {
+      // Prompt for use to select test titles or tags option
+      const titleOrTagPrompt = await select({
+        message: "Choose to filter by specific test titles or tags: ",
+        clearInputWhenSelected: true,
+        options: [
+          {
+            name: "Test titles (requires cy-grep)",
+            value: "Titles",
+          },
+          {
+            name: "Test tags (requires cy-grep)",
+            value: "Tags",
+          },
+        ],
+        required: true,
+      });
+      process.env.CY_GREP_FILTER_METHOD = titleOrTagPrompt;
+    }
+
+    // Arrays for storing specs and/or tests
     // If user passes --print-selected
     const specArr = [];
     const testArr = [];
@@ -155,9 +206,10 @@ async function runSelectedSpecs() {
         }
 
         const specSelections = await select({
-          message: "Select specs to run",
+          message: "Select specs to run:",
           multiple: true,
           required: true,
+          clearInputWhenSelected: true,
           canToggleAll: true,
           options: (input = "") => {
             const specs = specsChoices();
@@ -194,7 +246,7 @@ async function runSelectedSpecs() {
             specArr.push(`${spec}`);
           });
 
-          if (specAndTestPrompt.includes("Tests")) {
+          if (process.env.CY_GREP_FILTER_METHOD) {
             // For more info on grepExtraSpecs: https://github.com/bahmutov/cy-grep?tab=readme-ov-file#grepextraspecs
             process.env.CYPRESS_grepExtraSpecs = sortedSpecResult.toString();
           } else {
@@ -219,7 +271,7 @@ async function runSelectedSpecs() {
             }
           }
         } else {
-          if (specAndTestPrompt.includes("Tests")) {
+          if (process.env.CY_GREP_FILTER_METHOD) {
             process.env.CYPRESS_grepExtraSpecs = specSelections.toString();
           } else {
             process.argv.push(`--spec`);
@@ -235,7 +287,7 @@ async function runSelectedSpecs() {
       }
     }
 
-    if (specAndTestPrompt.includes("Tests")) {
+    if (process.env.CY_GREP_FILTER_METHOD === "Titles") {
       const specs = getSpecs(
         process.env.CYPRESS_CONFIG_FILE,
         process.env.TESTING_TYPE,
@@ -244,7 +296,7 @@ async function runSelectedSpecs() {
 
       if (specs.length > 0) {
         const testChoices = () => {
-          const tests = suitesTests();
+          const tests = suitesTests(false);
           let arr = [];
           tests.forEach((element) => {
             if (element.length === 2) {
@@ -285,8 +337,9 @@ async function runSelectedSpecs() {
         };
 
         const selectedTests = await select({
-          message: "Select tests to run",
+          message: "Select tests to run:",
           multiple: true,
+          clearInputWhenSelected: true,
           required: true,
           options: (input = "") => {
             const tests = separateStringJson();
@@ -319,8 +372,74 @@ async function runSelectedSpecs() {
 
         // Set the process.env for @bahmutov/cy-grep package using CYPRESS_*
         process.env.CYPRESS_grep = `${stringedTests}`;
-        process.env.CYPRESS_grepFilterSpecs = true;
-        process.env.CYPRESS_grepOmitFiltered = true;
+      } else {
+        console.log("\n");
+        console.log(
+          pc.redBright(pc.bold(` No ${process.env.TESTING_TYPE} specs found `)),
+        );
+        process.exit();
+      }
+    }
+
+    if (process.env.CY_GREP_FILTER_METHOD === "Tags") {
+      const specs = getSpecs(
+        process.env.CYPRESS_CONFIG_FILE,
+        process.env.TESTING_TYPE,
+        false,
+      );
+
+      if (specs.length > 0) {
+        const allTags = suitesTests(true);
+        if (allTags.length > 0) {
+          const separateStringJson = () => {
+            let arr = [];
+            allTags.forEach((element) => {
+              const choices = {
+                name: element,
+                value: element,
+              };
+              arr.push(choices);
+            });
+            return arr;
+          };
+
+          const selectedTags = await select({
+            message: "Select tags to run:",
+            multiple: true,
+            clearInputWhenSelected: true,
+            required: true,
+            options: (input = "") => {
+              const tags = separateStringJson();
+
+              const fuse = new Fuse(tags, {
+                keys: ["name"],
+              });
+
+              if (!input) return tags;
+              if (fuse) {
+                const result = fuse.search(input).map(({ item }) => item);
+                return result;
+              }
+              return [];
+            },
+          });
+
+          process.env.SELECTED_TAGS = selectedTags;
+
+          // Format the tags selected into a string separated by space
+          // This is the tag grep string format used by @bahmutov/cy-grep package
+
+          // Set the process.env for @bahmutov/cy-grep package using CYPRESS_*
+          process.env.CYPRESS_grepTags = `${process.env.SELECTED_TAGS}`;
+        } else {
+          console.log("\n");
+          console.log(
+            pc.redBright(
+              pc.bold(` No ${process.env.TESTING_TYPE} tags found `),
+            ),
+          );
+          process.exit();
+        }
       } else {
         console.log("\n");
         console.log(
@@ -338,12 +457,23 @@ async function runSelectedSpecs() {
         console.log("\n");
         console.log(specArr);
       }
-      if (specAndTestPrompt.includes("Tests")) {
+      if (process.env.CY_GREP_FILTER_METHOD === "Titles") {
         console.log("\n");
         console.log(pc.bgGreen(pc.black(pc.bold(` Test(s) selected: `))));
         console.log("\n");
         console.log(testArr);
       }
+      if (process.env.CY_GREP_FILTER_METHOD === "Tags") {
+        console.log("\n");
+        console.log(pc.bgGreen(pc.black(pc.bold(` Tag(s) selected: `))));
+        console.log("\n");
+        console.log(process.env.SELECTED_TAGS);
+      }
+    }
+
+    if (process.env.CY_GREP_FILTER_METHOD) {
+      process.env.CYPRESS_grepFilterSpecs = true;
+      process.env.CYPRESS_grepOmitFiltered = true;
     }
 
     // In case the user passes this option without selecting specs

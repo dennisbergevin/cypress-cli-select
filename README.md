@@ -29,7 +29,6 @@ Cypress interactive cli prompts to select and run spec(s) and test(s).
   - [Keyboard controls](#keyboard-controls)
 - [Print selected](#-print-selected)
 - [Test diff output](#test-diff-output)
-- [Specify a custom cypress.config directory](#-specify-a-custom-cypress-config-directory)
 - [Setting up a `npm` script](#-setting-up-a-npm-script)
 - [Typescript support](#-typescript-support)
 - [Contributions](#-contributions)
@@ -150,19 +149,6 @@ At the end of the Cypress run, if the total tests in a spec file is not equal to
 ![Cypress diff output demo](./assets/output-demo.png)
 
 **Note**: Apart from indicating a grep test filtering was performed on a given spec during the Cypress run, this output is particularly helpful in detecting `.only()` as well
-
----
-
-## Specify a custom cypress config directory
-
-This cli utilizes the [ cypress-find-specs ](https://github.com/bahmutov/find-cypress-specs) package. For more information on specifying a custom path to a cypress.config, see [ custom-config-filename ](https://github.com/bahmutov/find-cypress-specs?tab=readme-ov-file#custom-config-filename).
-
-```bash
-# Example
-CYPRESS_CONFIG_FILE=path/to/cypress.config.js npx cypress-cli-select run
-```
-
-This environment variable will direct this package to look for spec files specified in the config file path.
 
 ---
 
