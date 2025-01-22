@@ -8,10 +8,6 @@ Cypress interactive cli prompts to select and run spec(s) and test(s).
 
 ![Cypress-cli-select animated](./assets/cypress-cli-select-animated.gif)
 
-![Cypress-cli-select demo 1](./assets/cypress-cli-select-demo1.png)
-
-![Cypress-cli-select demo 2](./assets/cypress-cli-select-demo2.png)
-
 ## Features
 
 - ⌨ New interactive CLI prompts to select and run spec(s) and/or test(s)
@@ -19,12 +15,10 @@ Cypress interactive cli prompts to select and run spec(s) and test(s).
 
 #### Table of Contents
 
-- [Features](#features)
-  - [Table of Contents](#table-of-contents)
 - [Installation](#-installation)
-- [Help mode](#-help-mode)
 - [Run mode](#-run-mode)
   - [Keyboard controls](#keyboard-controls)
+- [Help mode](#-help-mode)
 - [Choose spec pattern](#-choose-spec-pattern)
   - [Keyboard controls](#keyboard-controls)
 - [Print selected](#-print-selected)
@@ -38,15 +32,9 @@ Cypress interactive cli prompts to select and run spec(s) and test(s).
 
 ## Installation
 
-1. Install the following packages:
-
-You can either run the executable command via `npx` or install locally via `npm`:
+1. Install the following package:
 
 ```sh
-# Via npx
-npx cypress-cli-select run
-
-# Install via npm
 npm install --save-dev cypress-cli-select
 ```
 
@@ -57,18 +45,6 @@ npm install --save-dev @bahmutov/cy-grep
 ```
 
 Follow the installation and setup for `@bahmutov/cy-grep` in the project [README](https://github.com/bahmutov/cy-grep)
-
----
-
-## Help mode
-
-To open the cli help menu, pass the `--help` flag:
-
-```bash
-npx cypress-cli-select run --help
-```
-
-![Cypress cli select help menu](./assets/cypress-cli-select-help.png)
 
 ---
 
@@ -108,6 +84,18 @@ npx cypress-cli-select run --component --browser=chrome
 | <kbd>Ctrl</kbd> + <kbd>c</kbd> |              Exit               |
 
 **Note**: You can also filter choices displayed in list by typing
+
+---
+
+## Help mode
+
+To open the cli help menu, pass the `--help` flag:
+
+```bash
+npx cypress-cli-select run --help
+```
+
+![Cypress cli select help menu](./assets/help-menu.gif)
 
 ---
 
