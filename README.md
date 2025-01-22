@@ -6,7 +6,7 @@
 Cypress interactive cli prompts to select and run spec(s) and test(s).
 </p>
 
-![Cypress-cli-select animated](./assets/cypress-cli-select-animated.gif)
+<img src="./assets/cypress-cli-select-animated.gif" alt="Cypress-cli-select demo" loop=infinite>
 
 ## Features
 
@@ -95,7 +95,7 @@ To open the cli help menu, pass the `--help` flag:
 npx cypress-cli-select run --help
 ```
 
-![Cypress cli select help menu](./assets/help-menu.gif)
+<img src="./assets/help-menu.gif" alt="Cypress-cli-select help menu" loop=infinite>
 
 ---
 
@@ -117,7 +117,7 @@ npx cypress-cli-select run --choose-spec-pattern
 | <kbd>Shift</kbd> + <kbd>⬇</kbd> |      Reorder current down       |
 |         <kbd>Enter</kbd>         |          Confirm order          |
 
-![Cypress cli select --choose-spec-pattern](./assets/choose-spec-pattern-demo.gif)
+<img src="./assets/choose-spec-pattern-demo.gif" alt="Cypress-cli-select choose-spec-pattern demo" loop=infinite>
 
 ---
 
