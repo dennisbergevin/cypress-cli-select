@@ -111,7 +111,7 @@ async function runSelectedSpecs() {
     yarg
       .completion("--print-selected", false)
       .option("print-selected", {
-        desc: "Prints selected spec(s) and test(s)",
+        desc: "Prints selected spec(s), test(s) or tag(s)",
         type: "boolean",
       })
       .example("npx cypress-cli-select run --print-selected");
@@ -127,7 +127,7 @@ async function runSelectedSpecs() {
     yarg
       .scriptName("npx cypress-cli-select run")
       .usage(
-        "An interactive cli interface to select Cypress spec(s) and test(s) to run\n",
+        "\nAn interactive cli interface to select Cypress spec(s) and test(s) to run\n",
       )
       .usage("$0 [args]")
       .example("npx cypress-cli-select run --browser=firefox --retries=2")
