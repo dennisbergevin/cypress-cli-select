@@ -63,8 +63,6 @@ For selecting component spec(s):
 npx cypress-cli-select run --component
 ```
 
-If you have [@bahmutov/cy-grep](https://github.com/bahmutov/cy-grep) plugin installed in your project, you can also select tests to run by their title.
-
 You can also include more cli arguments similar to `cypress run`, as the command harnesses the power of [Cypress module API](https://docs.cypress.io/guides/guides/module-api):
 
 ```bash
@@ -90,7 +88,7 @@ npx cypress-cli-select run --component --browser=chrome
 
 ## Test titles or tags
 
-If `@bahmutov/cy-grep` package is installed in your project, test titles and tags are available to select.
+If [@bahmutov/cy-grep](https://github.com/bahmutov/cy-grep) package is installed in your project, test titles and tags are available to select.
 
 <img src="./tests/run-spec-tag.gif" alt="Cypress-cli-select tag selection" loop=infinite>
 
