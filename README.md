@@ -6,7 +6,7 @@
 Cypress interactive cli prompts to select and run spec(s) and test(s)/tag(s).
 </p>
 
-<img src="./assets/cypress-cli-select-animated.gif" alt="Cypress-cli-select demo" loop=infinite>
+<img src="./tests/run-spec-title.gif" alt="Cypress-cli-select demo" loop=infinite>
 
 ## Features
 
@@ -18,6 +18,7 @@ Cypress interactive cli prompts to select and run spec(s) and test(s)/tag(s).
 - [Installation](#-installation)
 - [Run mode](#-run-mode)
   - [Keyboard controls](#keyboard-controls)
+- [Test titles or tags](#test-titles-or-tags)
 - [Help mode](#-help-mode)
 - [Choose spec pattern](#-choose-spec-pattern)
   - [Keyboard controls](#keyboard-controls)
