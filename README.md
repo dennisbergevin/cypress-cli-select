@@ -6,7 +6,7 @@
 Cypress interactive cli prompts to select and run spec(s) and test(s)/tag(s).
 </p>
 
-<img src="./tests/run-spec-title.gif" alt="Cypress-cli-select demo" loop=infinite>
+<img src="./assets/cypress-cli-select-animated.gif" alt="Cypress-cli-select demo" loop=infinite>
 
 ## Features
 
