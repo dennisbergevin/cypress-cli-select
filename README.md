@@ -3,14 +3,14 @@
 </p>
 
 <p align="center">
-Cypress interactive cli prompts to select and run spec(s) and test(s).
+Cypress interactive cli prompts to select and run spec(s) and test(s)/tag(s).
 </p>
 
 <img src="./assets/cypress-cli-select-animated.gif" alt="Cypress-cli-select demo" loop=infinite>
 
 ## Features
 
-- ⌨ New interactive CLI prompts to select and run spec(s) and/or test(s)
+- ⌨ New interactive CLI prompts to select and run spec(s) and/or test(s)/tag(s)
 - 👟 A new `cypress run` command to allow user to pass desired arguments
 
 #### Table of Contents
@@ -87,6 +87,14 @@ npx cypress-cli-select run --component --browser=chrome
 
 ---
 
+## Test titles or tags
+
+If `@bahmutov/cy-grep` package is installed in your project, test titles and tags are available to select.
+
+<img src="./tests/run-spec-tag.gif" alt="Cypress-cli-select tag selection" loop=infinite>
+
+---
+
 ## Help mode
 
 To open the cli help menu, pass the `--help` flag:
@@ -123,7 +131,7 @@ npx cypress-cli-select run --choose-spec-pattern
 
 ## Print selected
 
-If you want to print all selected spec(s) and/or test(s) just prior to Cypress run, pass the following flag:
+If you want to print all selected spec(s) and/or test(s)/tag(s) just prior to Cypress run, pass the following flag:
 
 ```bash
 npx cypress-cli-select run --print-selected
@@ -137,7 +145,7 @@ At the end of the Cypress run, if the total tests in a spec file is not equal to
 
 ![Cypress diff output demo](./assets/output-demo.png)
 
-**Note**: Apart from indicating a grep test filtering was performed on a given spec during the Cypress run, this output is particularly helpful in detecting `.only()` as well
+**Note**: Apart from indicating a grep test filtering was performed on a given spec during the Cypress run, this output is particularly helpful in detecting `.only()`.
 
 ---
 
