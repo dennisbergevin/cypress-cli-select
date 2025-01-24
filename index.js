@@ -111,7 +111,7 @@ async function runSelectedSpecs() {
     yarg
       .completion("--print-selected", false)
       .option("print-selected", {
-        desc: "Prints selected spec(s), test(s) or tag(s)",
+        desc: "Prints selected specs, tests or tags",
         type: "boolean",
       })
       .example("npx cypress-cli-select run --print-selected");
@@ -127,10 +127,10 @@ async function runSelectedSpecs() {
     yarg
       .scriptName("npx cypress-cli-select run")
       .usage(
-        "\nInteractive cli prompts to select Cypress spec(s) and test(s) to run\n",
+        "\nInteractive cli prompts to select Cypress specs, tests or tags run\n",
       )
       .usage("$0 [args]")
-      .example("npx cypress-cli-select run --browser=firefox --retries=2")
+      .example("npx cypress-cli-select run --browser=firefox")
       .help().argv;
 
     if (process.argv.includes("--component")) {

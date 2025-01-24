@@ -56,7 +56,7 @@
 #   Show                            Show the subsequent commands in the output
 
 # Where should we write the GIF?
-Output tests/run-spec-title.gif
+Output assets/run-spec-title.gif
 Output tests/run-spec-title.txt
 
 # Set fontsize and width/height
@@ -71,6 +71,7 @@ Set BorderRadius 10
 
 # Set window bar 
 Set WindowBar Colorful
+Set WindowBarSize 60
 
 # Set theme 
 Set Theme "nord"

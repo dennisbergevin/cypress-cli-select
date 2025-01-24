@@ -1,3 +1,4 @@
+
 # VHS documentation
 #
 # Output:
@@ -56,8 +57,8 @@
 #   Show                            Show the subsequent commands in the output
 
 # Where should we write the GIF?
-Output assets/run-spec-tag.gif
-Output tests/run-spec-tag.txt
+Output assets/run-help.gif
+Output tests/run-help.txt
 
 # Set fontsize and width/height
 Set FontSize 20
@@ -77,7 +78,7 @@ Set WindowBarSize 60
 Set Theme "nord"
 
 # Type a command in the terminal.
-Type@100ms "npx cypress-cli-select run"
+Type@100ms "npx cypress-cli-select run --help"
 
 # Hide the npx loader
 Hide
@@ -85,107 +86,10 @@ Hide
 # Run the command
 Enter
 
-# Await the cli title and first prompt
-Wait+Screen /Cypress-cli-select/
-Wait+Screen /Choose to filter by specs, specific test titles or tags/
+# Await the help menu 
+Wait+Screen /Interactive cli prompts to select Cypress/
 
 # Now restart recording
 Show
-Sleep 1s
+Sleep 8s
 
-# Ensure the first prompt choices are visible on screen
-Wait+Screen /Specs/
-Wait+Screen /Test titles or tags \(requires cy-grep\)/
-
-# Select all options
-Ctrl+a
-
-Sleep 2s
-
-# Confirm 
-Enter
-
-# Await the second prompt for titles or tags
-Wait+Screen /Choose to filter by specific test titles or tags/
-Wait+Screen /Test titles \(requires cy-grep\)/
-Wait+Screen /Test tags \(requires cy-grep\)/
-
-Sleep 2s
-Down
-Sleep 1s
-
-# Select tags 
-Tab
-
-# Admire the output for a bit 
-Sleep 2s
-
-# Submit tags
-Enter
-
-# Await the spec list
-Wait+Screen /Select specs to run/
-Wait+Screen /todo\.cy\.js/
-Wait+Screen /actions\.cy\.js/
-
-Sleep 2s
-
-# Type a search in the prompt
-Type@100ms "misc"
-# Await the spec list to show search result
-Wait+Screen /misc\.cy\.js/
-
-Sleep 2s
-
-# Select spec by pressing tab 
-Tab 
-
-Sleep 2s
-
-# Confirm spec
-Enter
-
-# Await tag list
-Wait+Screen /Select tags to run/
-Wait+Screen /@smoke/
-Wait+Screen /@p2/
-Wait+Screen /@nightly/
-Wait+Screen /@p3/
-Wait+Screen /@sanity/
-Wait+Screen /@p1/
-
-Sleep 2s
-
-# Type a search in the prompt 
-Type@200ms "sanity"
-
-# Await the test list to show search result
-Wait+Screen /@sanity/
-Sleep 2s
-
-# Select tag 
-Tab 
-
-Sleep 2s
-
-# Remove selected tag
-Backspace
-
-Sleep 1s
-
-# Type a new search in the prompt
-Type@200ms "nightly"
-
-# Await the tag list to show search result
-Wait+Screen /@nightly/
-
-# Select new tag
-Tab
-
-Sleep 2s
-
-# Confirm 
-Enter
-
-# Await the cypress run title to show
-Wait+Screen /Running Cypress/

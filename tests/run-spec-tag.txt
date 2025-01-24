@@ -315,8 +315,40 @@
 
 
 ────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
+>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
 
 
 
@@ -375,7 +407,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -387,38 +418,6 @@
  toggle all, <enter> to proceed)
 >[ ] Specs
  [ ] Test titles or tags (requires cy-grep)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  (Press <tab> to select/deselect, <ctrl> + <a> to
- toggle all, <enter> to proceed)
->[ ] Specs
- [ ] Test titles or tags (requires cy-grep)
-
 
 
 
@@ -468,7 +467,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -480,7 +478,6 @@
  toggle all, <enter> to proceed)
 >[ ] Specs
  [ ] Test titles or tags (requires cy-grep)
-
 
 
 
@@ -530,7 +527,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -538,42 +534,10 @@
  Cypress-cli-select
 
 
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  (Press <tab> to select/deselect, <enter> to proceed)
->[ ] Test titles (requires cy-grep)
- [ ] Test tags (requires cy-grep)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  (Press <tab> to select/deselect, <enter> to proceed)
->[ ] Test titles (requires cy-grep)
- [ ] Test tags (requires cy-grep)
-
+? Choose to filter by specs, specific test titles or tags:  (Press <backspace> to remove option) Specs, Test
+ titles or tags (requires cy-grep)
+>[✔] Specs
+ [✔] Test titles or tags (requires cy-grep)
 
 
 
@@ -623,6 +587,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  (Press <tab> to select/deselect, <enter> to proceed)
+>[ ] Test titles (requires cy-grep)
+ [ ] Test tags (requires cy-grep)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -654,7 +647,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -667,6 +659,35 @@
 >[ ] Test titles (requires cy-grep)
  [ ] Test tags (requires cy-grep)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  (Press <tab> to select/deselect, <enter> to proceed)
+>[ ] Test titles (requires cy-grep)
+ [ ] Test tags (requires cy-grep)
 
 
 
@@ -716,7 +737,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -747,6 +767,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  (Press <backspace> to remove option) Test tags
+(requires cy-grep)
+ [ ] Test titles (requires cy-grep)
+>[✔] Test tags (requires cy-grep)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -778,38 +827,6 @@
 
 
 
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  (Press <backspace> to remove option) Test tags
-(requires cy-grep)
- [ ] Test titles (requires cy-grep)
->[✔] Test tags (requires cy-grep)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -840,7 +857,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -851,7 +867,6 @@
 ? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
 ? Choose to filter by specific test titles or tags:  Test tags (requires cy-grep)
 ? Select specs to run: (Press <tab> to select/deselect, <ctrl> + <a> to toggle all, <enter> to proceed)
-
 
 
 
@@ -902,7 +917,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -933,7 +947,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -956,7 +969,6 @@
  [ ] cypress/e2e/2-advanced-examples/misc.cy.js
  [ ] cypress/e2e/2-advanced-examples/navigation.cy.js
 (Use arrow keys to reveal more options)
-
 
 
 
@@ -995,7 +1007,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1018,7 +1029,6 @@
  [ ] cypress/e2e/2-advanced-examples/misc.cy.js
  [ ] cypress/e2e/2-advanced-examples/navigation.cy.js
 (Use arrow keys to reveal more options)
-
 
 
 
@@ -1039,7 +1049,6 @@
 ? Select specs to run: (Press <tab> to select/deselect, <ctrl> + <a> to toggle all, <enter> to proceed)
 >>  misc
 >[ ] cypress/e2e/2-advanced-examples/misc.cy.js
-
 
 
 
@@ -1088,7 +1097,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1119,7 +1127,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1130,7 +1137,6 @@
 ? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
 ? Choose to filter by specific test titles or tags:  Test tags (requires cy-grep)
 ? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
-
 
 
 
@@ -1162,7 +1168,6 @@
 ? Choose to filter by specific test titles or tags:  Test tags (requires cy-grep)
 ? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
 ? Select tags to run: (Press <tab> to select/deselect, <enter> to proceed)
-
 
 
 
@@ -1212,7 +1217,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1231,38 +1235,6 @@
  [ ] @p3
  [ ] @sanity
  [ ] @p1
-
-
-
-
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  Test tags (requires cy-grep)
-? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
-? Select tags to run: (Press <tab> to select/deselect, <enter> to proceed)
->>
->[ ] @smoke
- [ ] @p2
- [ ] @nightly
- [ ] @p3
- [ ] @sanity
- [ ] @p1
-
 
 
 
@@ -1305,6 +1277,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  Test tags (requires cy-grep)
+? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
+? Select tags to run: (Press <tab> to select/deselect, <enter> to proceed)
+>>
+>[ ] @smoke
+ [ ] @p2
+ [ ] @nightly
+ [ ] @p3
+ [ ] @sanity
+ [ ] @p1
+
+
+
+
+
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -1336,7 +1337,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1367,7 +1367,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1386,7 +1385,6 @@
  [ ] @p3
  [ ] @sanity
  [ ] @p1
-
 
 
 
@@ -1413,7 +1411,6 @@
 >>  sanity
 >[ ] @sanity
  [ ] @nightly
-
 
 
 
@@ -1460,7 +1457,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1474,7 +1470,6 @@
 ? Select tags to run: (Press <tab> to select/deselect, <enter> to proceed)
 >>  sanity
 >[ ] @sanity
-
 
 
 
@@ -1522,7 +1517,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1553,7 +1547,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1584,7 +1577,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1603,7 +1595,6 @@
  [ ] @p3
  [ ] @sanity
  [ ] @p1
-
 
 
 
@@ -1646,7 +1637,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1661,7 +1651,6 @@
 >>  nightly
 >[ ] @nightly
  [ ] @sanity
-
 
 
 
@@ -1708,7 +1697,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1739,6 +1727,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  Test tags (requires cy-grep)
+? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
+? Select tags to run: @nightly
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -1754,38 +1771,6 @@
 
 
  Running Cypress:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  Test tags (requires cy-grep)
-? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
-? Select tags to run: @nightly
-
-
- Running Cypress:
-
 
 
 

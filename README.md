@@ -3,14 +3,14 @@
 </p>
 
 <p align="center">
-Cypress interactive cli prompts to select and run spec(s) and test(s)/tag(s).
+Cypress interactive cli prompts to select and run spec(s), test(s) or tag(s).
 </p>
 
 <img src="./tests/run-spec-title.gif" alt="Cypress-cli-select demo" loop=infinite>
 
 ## Features
 
-- ⌨ New interactive CLI prompts to select and run spec(s) and/or test(s)/tag(s)
+- ⌨ New interactive CLI prompts to select and run spec(s), test(s) or tag(s)
 - 👟 A new `cypress run` command to allow user to pass desired arguments
 
 #### Table of Contents
@@ -102,7 +102,7 @@ To open the cli help menu, pass the `--help` flag:
 npx cypress-cli-select run --help
 ```
 
-<img src="./assets/help-menu.gif" alt="Cypress-cli-select help menu" loop=infinite>
+<img src="./assets/run-help.gif" alt="Cypress-cli-select help menu" loop=infinite>
 
 ---
 

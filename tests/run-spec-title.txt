@@ -315,8 +315,40 @@
 
 
 ────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
+>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
 
 
 
@@ -375,6 +407,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  (Press <tab> to select/deselect, <ctrl> + <a> to
+ toggle all, <enter> to proceed)
+>[ ] Specs
+ [ ] Test titles or tags (requires cy-grep)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -406,7 +467,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -418,38 +478,6 @@
  toggle all, <enter> to proceed)
 >[ ] Specs
  [ ] Test titles or tags (requires cy-grep)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  (Press <tab> to select/deselect, <ctrl> + <a> to
- toggle all, <enter> to proceed)
->[ ] Specs
- [ ] Test titles or tags (requires cy-grep)
-
 
 
 
@@ -499,7 +527,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -530,7 +557,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -542,38 +568,6 @@
 ? Choose to filter by specific test titles or tags:  (Press <tab> to select/deselect, <enter> to proceed)
 >[ ] Test titles (requires cy-grep)
  [ ] Test tags (requires cy-grep)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  (Press <tab> to select/deselect, <enter> to proceed)
->[ ] Test titles (requires cy-grep)
- [ ] Test tags (requires cy-grep)
-
 
 
 
@@ -623,6 +617,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  (Press <tab> to select/deselect, <enter> to proceed)
+>[ ] Test titles (requires cy-grep)
+ [ ] Test tags (requires cy-grep)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -654,7 +677,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -665,38 +687,6 @@
 ? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
 ? Choose to filter by specific test titles or tags:  (Press <tab> to select/deselect, <enter> to proceed)
 >[ ] Test titles (requires cy-grep)
- [ ] Test tags (requires cy-grep)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  (Press <backspace> to remove option) Test titles
-(requires cy-grep)
->[✔] Test titles (requires cy-grep)
  [ ] Test tags (requires cy-grep)
 
 
@@ -747,6 +737,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  (Press <backspace> to remove option) Test titles
+(requires cy-grep)
+>[✔] Test titles (requires cy-grep)
+ [ ] Test tags (requires cy-grep)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -778,7 +797,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -802,6 +820,35 @@
 
 
 
+
+
+
+
+
+
+
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  Test titles (requires cy-grep)
+? Select specs to run: (Press <tab> to select/deselect, <ctrl> + <a> to toggle all, <enter> to proceed)
+>>
+>[ ] cypress/e2e/1-getting-started/todo.cy.js
+ [ ] cypress/e2e/2-advanced-examples/actions.cy.js
+ [ ] cypress/e2e/2-advanced-examples/aliasing.cy.js
+ [ ] cypress/e2e/2-advanced-examples/assertions.cy.js
+ [ ] cypress/e2e/2-advanced-examples/connectors.cy.js
+ [ ] cypress/e2e/2-advanced-examples/cookies.cy.js
+ [ ] cypress/e2e/2-advanced-examples/cypress_api.cy.js
+ [ ] cypress/e2e/2-advanced-examples/location.cy.js
+ [ ] cypress/e2e/2-advanced-examples/misc.cy.js
+ [ ] cypress/e2e/2-advanced-examples/navigation.cy.js
+(Use arrow keys to reveal more options)
 
 
 
@@ -840,7 +887,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -863,38 +909,6 @@
  [ ] cypress/e2e/2-advanced-examples/misc.cy.js
  [ ] cypress/e2e/2-advanced-examples/navigation.cy.js
 (Use arrow keys to reveal more options)
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  Test titles (requires cy-grep)
-? Select specs to run: (Press <tab> to select/deselect, <ctrl> + <a> to toggle all, <enter> to proceed)
->>
->[ ] cypress/e2e/1-getting-started/todo.cy.js
- [ ] cypress/e2e/2-advanced-examples/actions.cy.js
- [ ] cypress/e2e/2-advanced-examples/aliasing.cy.js
- [ ] cypress/e2e/2-advanced-examples/assertions.cy.js
- [ ] cypress/e2e/2-advanced-examples/connectors.cy.js
- [ ] cypress/e2e/2-advanced-examples/cookies.cy.js
- [ ] cypress/e2e/2-advanced-examples/cypress_api.cy.js
- [ ] cypress/e2e/2-advanced-examples/location.cy.js
- [ ] cypress/e2e/2-advanced-examples/misc.cy.js
- [ ] cypress/e2e/2-advanced-examples/navigation.cy.js
-(Use arrow keys to reveal more options)
-
 
 
 
@@ -933,7 +947,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -956,7 +969,6 @@
  [ ] cypress/e2e/2-advanced-examples/misc.cy.js
  [ ] cypress/e2e/2-advanced-examples/navigation.cy.js
 (Use arrow keys to reveal more options)
-
 
 
 
@@ -977,7 +989,6 @@
 ? Select specs to run: (Press <tab> to select/deselect, <ctrl> + <a> to toggle all, <enter> to proceed)
 >>  misc
 >[ ] cypress/e2e/2-advanced-examples/misc.cy.js
-
 
 
 
@@ -1026,7 +1037,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1057,7 +1067,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1088,7 +1097,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1111,38 +1119,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  Test titles (requires cy-grep)
-? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
-? Select tests to run: (Press <tab> to select/deselect, <enter> to proceed)
->>
->[ ] todo.cy.js > example to-do app > displays two todo items by default
- [ ] todo.cy.js > example to-do app > can add new todo items
- [ ] todo.cy.js > example to-do app > can check off an item as completed
- [ ] todo.cy.js > example to-do app > with a checked task > can filter for uncompleted tasks
- [ ] todo.cy.js > example to-do app > with a checked task > can filter for completed tasks
- [ ] todo.cy.js > example to-do app > with a checked task > can delete all completed tasks
- [ ] actions.cy.js > Actions > .type() - type into a DOM element
- [ ] actions.cy.js > Actions > .focus() - focus on a DOM element
- [ ] actions.cy.js > Actions > .blur() - blur off a DOM element
- [ ] actions.cy.js > Actions > .clear() - clears an input or textarea element
-(Use arrow keys to reveal more options)
 
 
 
@@ -1181,6 +1157,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  Test titles (requires cy-grep)
+? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
+? Select tests to run: (Press <tab> to select/deselect, <enter> to proceed)
+>>
+>[ ] todo.cy.js > example to-do app > displays two todo items by default
+ [ ] todo.cy.js > example to-do app > can add new todo items
+ [ ] todo.cy.js > example to-do app > can check off an item as completed
+ [ ] todo.cy.js > example to-do app > with a checked task > can filter for uncompleted tasks
+ [ ] todo.cy.js > example to-do app > with a checked task > can filter for completed tasks
+ [ ] todo.cy.js > example to-do app > with a checked task > can delete all completed tasks
+ [ ] actions.cy.js > Actions > .type() - type into a DOM element
+ [ ] actions.cy.js > Actions > .focus() - focus on a DOM element
+ [ ] actions.cy.js > Actions > .blur() - blur off a DOM element
+ [ ] actions.cy.js > Actions > .clear() - clears an input or textarea element
+(Use arrow keys to reveal more options)
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -1212,6 +1217,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  Test titles (requires cy-grep)
+? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
+? Select tests to run: (Press <tab> to select/deselect, <enter> to proceed)
+>>  navigation
+>[ ] navigation.cy.js > Navigation > cy.reload() - reload the page
+ [ ] navigation.cy.js > Navigation > cy.visit() - visit a remote url
+ [ ] navigation.cy.js > Navigation > cy.go() - go back or forward in the browser's history
+ [ ] location.cy.js > Location > cy.location() - get window.location
+ [ ] actions.cy.js > Actions > .submit() - submit a form
+ [ ] actions.cy.js > Actions > .uncheck() - uncheck a checkbox element
+ [ ] location.cy.js > Location > cy.url() - get the current URL
+ [ ] actions.cy.js > Actions > .type() - type into a DOM element
+ [ ] actions.cy.js > Actions > .focus() - focus on a DOM element
+ [ ] actions.cy.js > Actions > .blur() - blur off a DOM element
+(Use arrow keys to reveal more options)
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -1243,7 +1277,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1274,7 +1307,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1287,8 +1319,8 @@
 ? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
 ? Select tests to run: (Press <tab> to select/deselect, <enter> to proceed)
 >>  navigation
->[ ] navigation.cy.js > Navigation > cy.reload() - reload the page
- [ ] navigation.cy.js > Navigation > cy.visit() - visit a remote url
+ [ ] navigation.cy.js > Navigation > cy.reload() - reload the page
+>[ ] navigation.cy.js > Navigation > cy.visit() - visit a remote url
  [ ] navigation.cy.js > Navigation > cy.go() - go back or forward in the browser's history
  [ ] location.cy.js > Location > cy.location() - get window.location
  [ ] actions.cy.js > Actions > .submit() - submit a form
@@ -1297,7 +1329,6 @@
  [ ] actions.cy.js > Actions > .type() - type into a DOM element
  [ ] actions.cy.js > Actions > .focus() - focus on a DOM element
  [ ] actions.cy.js > Actions > .blur() - blur off a DOM element
-(Use arrow keys to reveal more options)
 
 
 
@@ -1336,38 +1367,6 @@
 
 
 
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  Test titles (requires cy-grep)
-? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
-? Select tests to run: (Press <tab> to select/deselect, <enter> to proceed)
->>  navigation
- [ ] navigation.cy.js > Navigation > cy.reload() - reload the page
->[ ] navigation.cy.js > Navigation > cy.visit() - visit a remote url
- [ ] navigation.cy.js > Navigation > cy.go() - go back or forward in the browser's history
- [ ] location.cy.js > Location > cy.location() - get window.location
- [ ] actions.cy.js > Actions > .submit() - submit a form
- [ ] actions.cy.js > Actions > .uncheck() - uncheck a checkbox element
- [ ] location.cy.js > Location > cy.url() - get the current URL
- [ ] actions.cy.js > Actions > .type() - type into a DOM element
- [ ] actions.cy.js > Actions > .focus() - focus on a DOM element
- [ ] actions.cy.js > Actions > .blur() - blur off a DOM element
-
-
-
-
-
-
-
-
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1398,7 +1397,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1421,7 +1419,6 @@
  [ ] actions.cy.js > Actions > .type() - type into a DOM element
  [ ] actions.cy.js > Actions > .focus() - focus on a DOM element
  [ ] actions.cy.js > Actions > .blur() - blur off a DOM element
-
 
 
 
@@ -1460,7 +1457,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1491,6 +1487,35 @@
 
 
 
+────────────────────────────────────────────────────────────────────────────────
+> npx cypress-cli-select run
+
+
+ Cypress-cli-select
+
+
+? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
+? Choose to filter by specific test titles or tags:  Test titles (requires cy-grep)
+? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
+? Select tests to run:
+>>
+>[ ] todo.cy.js > example to-do app > displays two todo items by default
+ [ ] todo.cy.js > example to-do app > can add new todo items
+ [ ] todo.cy.js > example to-do app > can check off an item as completed
+ [ ] todo.cy.js > example to-do app > with a checked task > can filter for uncompleted tasks
+ [ ] todo.cy.js > example to-do app > with a checked task > can filter for completed tasks
+ [ ] todo.cy.js > example to-do app > with a checked task > can delete all completed tasks
+ [ ] actions.cy.js > Actions > .type() - type into a DOM element
+ [ ] actions.cy.js > Actions > .focus() - focus on a DOM element
+ [ ] actions.cy.js > Actions > .blur() - blur off a DOM element
+ [ ] actions.cy.js > Actions > .clear() - clears an input or textarea element
+
+
+
+
+
+
+
 
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
@@ -1522,7 +1547,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1534,18 +1558,17 @@
 ? Choose to filter by specific test titles or tags:  Test titles (requires cy-grep)
 ? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
 ? Select tests to run:
->>
->[ ] todo.cy.js > example to-do app > displays two todo items by default
- [ ] todo.cy.js > example to-do app > can add new todo items
- [ ] todo.cy.js > example to-do app > can check off an item as completed
- [ ] todo.cy.js > example to-do app > with a checked task > can filter for uncompleted tasks
- [ ] todo.cy.js > example to-do app > with a checked task > can filter for completed tasks
- [ ] todo.cy.js > example to-do app > with a checked task > can delete all completed tasks
- [ ] actions.cy.js > Actions > .type() - type into a DOM element
- [ ] actions.cy.js > Actions > .focus() - focus on a DOM element
- [ ] actions.cy.js > Actions > .blur() - blur off a DOM element
- [ ] actions.cy.js > Actions > .clear() - clears an input or textarea element
-
+>>  window
+>[ ] window.cy.js > Window > cy.title() - get the title
+ [ ] window.cy.js > Window > cy.document() - get the document object
+ [ ] window.cy.js > Window > cy.window() - get the global window object
+ [ ] querying.cy.js > Querying > cy.get() - query DOM elements
+ [ ] querying.cy.js > Querying > best practices - selecting elements
+ [ ] waiting.cy.js > Waiting > cy.wait() - wait for a specific route
+ [ ] querying.cy.js > Querying > cy.root() - query the root DOM element
+ [ ] aliasing.cy.js > Aliasing > .as() - alias a route for later use
+ [ ] querying.cy.js > Querying > cy.contains() - query DOM elements with matching content
+ [ ] waiting.cy.js > Waiting > cy.wait() - wait for a specific amount of time
 
 
 
@@ -1569,45 +1592,13 @@
 >[ ] window.cy.js > Window > cy.title() - get the title
  [ ] window.cy.js > Window > cy.document() - get the document object
  [ ] window.cy.js > Window > cy.window() - get the global window object
- [ ] location.cy.js > Location > cy.location() - get window.location
  [ ] querying.cy.js > Querying > cy.get() - query DOM elements
  [ ] querying.cy.js > Querying > best practices - selecting elements
  [ ] waiting.cy.js > Waiting > cy.wait() - wait for a specific route
  [ ] querying.cy.js > Querying > cy.root() - query the root DOM element
  [ ] aliasing.cy.js > Aliasing > .as() - alias a route for later use
  [ ] querying.cy.js > Querying > cy.contains() - query DOM elements with matching content
-
-
-
-
-
-
-
-
-
-────────────────────────────────────────────────────────────────────────────────
-> npx cypress-cli-select run
-
-
- Cypress-cli-select
-
-
-? Choose to filter by specs, specific test titles or tags:  Specs, Test titles or tags (requires cy-grep)
-? Choose to filter by specific test titles or tags:  Test titles (requires cy-grep)
-? Select specs to run: cypress/e2e/2-advanced-examples/misc.cy.js
-? Select tests to run:
->>  window
->[ ] window.cy.js > Window > cy.title() - get the title
- [ ] window.cy.js > Window > cy.document() - get the document object
- [ ] window.cy.js > Window > cy.window() - get the global window object
- [ ] location.cy.js > Location > cy.location() - get window.location
- [ ] querying.cy.js > Querying > cy.get() - query DOM elements
- [ ] querying.cy.js > Querying > best practices - selecting elements
- [ ] waiting.cy.js > Waiting > cy.wait() - wait for a specific route
- [ ] querying.cy.js > Querying > cy.root() - query the root DOM element
- [ ] aliasing.cy.js > Aliasing > .as() - alias a route for later use
- [ ] querying.cy.js > Querying > cy.contains() - query DOM elements with matching content
-
+ [ ] waiting.cy.js > Waiting > cy.wait() - wait for a specific amount of time
 
 
 
@@ -1646,7 +1637,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1664,7 +1654,6 @@
  [ ] window.cy.js > Window > cy.window() - get the global window object
  [ ] location.cy.js > Location > cy.location() - get window.location
  [ ] actions.cy.js > Actions > cy.scrollTo() - scroll the window or element to a position
-
 
 
 
@@ -1708,7 +1697,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1726,7 +1714,6 @@
 >[ ] window.cy.js > Window > cy.window() - get the global window object
  [ ] location.cy.js > Location > cy.location() - get window.location
  [ ] actions.cy.js > Actions > cy.scrollTo() - scroll the window or element to a position
-
 
 
 
@@ -1770,7 +1757,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1801,7 +1787,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1832,7 +1817,6 @@
 
 
 
-
 ────────────────────────────────────────────────────────────────────────────────
 > npx cypress-cli-select run
 
@@ -1847,7 +1831,6 @@
 
 
  Running Cypress:
-
 
 
 
