@@ -6,7 +6,7 @@
 Cypress interactive cli prompts to select and run spec(s), test(s) or tag(s).
 </p>
 
-<img src="./tests/run-spec-title.gif" alt="Cypress-cli-select demo" loop=infinite>
+<img src="./assets/run-spec-title.gif" alt="Cypress-cli-select demo" loop=infinite>
 
 ## Features
 
@@ -90,7 +90,7 @@ npx cypress-cli-select run --component --browser=chrome
 
 If [@bahmutov/cy-grep](https://github.com/bahmutov/cy-grep) package is installed in your project, test titles and tags are available to select.
 
-<img src="./tests/run-spec-tag.gif" alt="Cypress-cli-select tag selection" loop=infinite>
+<img src="./assets/run-spec-tag.gif" alt="Cypress-cli-select tag selection" loop=infinite>
 
 ---
 
