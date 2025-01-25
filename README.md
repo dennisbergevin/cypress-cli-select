@@ -3,14 +3,14 @@
 </p>
 
 <p align="center">
-Cypress interactive cli prompts to select and run spec(s), test(s) or tag(s).
+Cypress interactive cli prompts to select and run specs, tests or tags.
 </p>
 
 <img src="./assets/run-spec-title.gif" alt="Cypress-cli-select demo" loop=infinite>
 
 ## Features
 
-- ⌨ New interactive CLI prompts to select and run spec(s), test(s) or tag(s)
+- ⌨ New interactive CLI prompts to select and run specs, tests or tags
 - 👟 A new `cypress run` command to allow user to pass desired arguments
 
 #### Table of Contents
@@ -39,7 +39,7 @@ Cypress interactive cli prompts to select and run spec(s), test(s) or tag(s).
 npm install --save-dev cypress-cli-select
 ```
 
-In order to run specific test(s) by their title, install the following plugin:
+In order to run specific tests by their title, install the following plugin:
 
 ```sh
 npm install --save-dev @bahmutov/cy-grep
@@ -51,13 +51,13 @@ Follow the installation and setup for `@bahmutov/cy-grep` in the project [README
 
 ## Run mode
 
-If you want to select e2e spec(s) to run, simply run the following command:
+If you want to select e2e specs to run, simply run the following command:
 
 ```bash
 npx cypress-cli-select run
 ```
 
-For selecting component spec(s):
+For selecting component specs:
 
 ```bash
 npx cypress-cli-select run --component
@@ -130,7 +130,7 @@ npx cypress-cli-select run --choose-spec-pattern
 
 ## Print selected
 
-If you want to print all selected spec(s) and/or test(s)/tag(s) just prior to Cypress run, pass the following flag:
+If you want to print all selected specs, tests or tags just prior to Cypress run, pass the following flag:
 
 ```bash
 npx cypress-cli-select run --print-selected
