@@ -15,19 +15,20 @@ Cypress interactive cli prompts to select and run specs, tests or tags.
 
 #### Table of Contents
 
-- [Installation](#-installation)
-- [Run mode](#-run-mode)
+- [Installation](#installation)
+- [Run mode](#run-mode)
   - [Keyboard controls](#keyboard-controls)
 - [Test titles or tags](#test-titles-or-tags)
-- [Help mode](#-help-mode)
-- [Choose spec pattern](#-choose-spec-pattern)
+- [Help mode](#help-mode)
+- [Choose spec pattern](#choose-spec-pattern)
   - [Keyboard controls](#keyboard-controls)
-- [Print selected](#-print-selected)
+- [Print selected](#print-selected)
+- [Submit focused](#submit-focused)
 - [Test diff output](#test-diff-output)
 - [Using a custom cypress config](#using-a-custom-cypress-config)
-- [Setting up a `npm` script](#-setting-up-a-npm-script)
-- [Typescript support](#-typescript-support)
-- [Contributions](#-contributions)
+- [Setting up a `npm` script](#setting-up-a-npm-script)
+- [Typescript support](#typescript-support)
+- [Contributions](#contributions)
 
 ---
 
@@ -137,6 +138,20 @@ npx cypress-cli-select run --print-selected
 ```
 
 ![Cypress cli select --print-selected](./assets/print-selected-demo.png)
+
+---
+
+## Submit focused
+
+When no other options are already selected, automatically select the currently focused option when pressing Enter.
+
+To enable this feature, pass the following flag:
+
+```bash
+npx cypress-cli-select run --submit-focused
+```
+
+---
 
 ## Test diff output
 

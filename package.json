@@ -7,7 +7,9 @@
     "cypress-cli-select": "index.js"
   },
   "devDependencies": {
-    "cypress": "^13.17.0"
+    "cli-testing-library": "^2.0.2",
+    "cypress": "^13.17.0",
+    "jest": "^29.7.0"
   },
   "keywords": [
     "cypress",
@@ -19,7 +21,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "test": "npx cypress-cli-select run"
+    "test": "jest"
   },
   "author": "Dennis Bergevin",
   "license": "MIT",

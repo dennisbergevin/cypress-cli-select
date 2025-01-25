@@ -107,6 +107,11 @@ async function runSelectedSpecs() {
     process.env.CYPRESS_CONFIG_FILE = process.argv[index + 1];
   }
 
+  if (process.argv.includes("--submit-focused")) {
+    findAndRemoveArgv("--submit-focused");
+    process.env.SUBMIT_FOCUSED = true;
+  }
+
   try {
     yarg
       .completion("--print-selected", false)
@@ -123,6 +128,14 @@ async function runSelectedSpecs() {
         type: "boolean",
       })
       .example("npx cypress-cli-select run --component --choose-spec-pattern");
+
+    yarg
+      .completion("--submit-focused", false)
+      .option("submit-focused", {
+        desc: "Selects and submits focused item using enter",
+        type: "boolean",
+      })
+      .example("npx cypress-cli-select run --submit-focused");
 
     yarg
       .scriptName("npx cypress-cli-select run")
@@ -149,6 +162,7 @@ async function runSelectedSpecs() {
       message: "Choose to filter by specs, specific test titles or tags: ",
       multiple: true,
       clearInputWhenSelected: true,
+      selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
       canToggleAll: true,
       options: [
         {
@@ -168,6 +182,7 @@ async function runSelectedSpecs() {
       const titleOrTagPrompt = await select({
         message: "Choose to filter by specific test titles or tags: ",
         clearInputWhenSelected: true,
+        selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
         options: [
           {
             name: "Test titles (requires cy-grep)",
@@ -209,6 +224,7 @@ async function runSelectedSpecs() {
           multiple: true,
           required: true,
           clearInputWhenSelected: true,
+          selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
           canToggleAll: true,
           options: (input = "") => {
             const specs = specsChoices();
@@ -335,6 +351,7 @@ async function runSelectedSpecs() {
           message: "Select tests to run:",
           multiple: true,
           clearInputWhenSelected: true,
+          selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
           required: true,
           options: (input = "") => {
             const tests = separateStringJson();
@@ -398,6 +415,7 @@ async function runSelectedSpecs() {
             message: "Select tags to run:",
             multiple: true,
             clearInputWhenSelected: true,
+            selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
             required: true,
             options: (input = "") => {
               const tags = separateStringJson();
