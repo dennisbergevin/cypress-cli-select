@@ -27,11 +27,9 @@ Thanks for being willing to contribute!
 
 ## Committing and Pushing changes
 
-Please make sure to run the node script to inspect behavior before you commit your changes:
+1. Run Jest tests via the `npm test` command
 
-```bash
-npx cypress-cli-select run
-```
+2. Run `npx cypress-cli-select run` to inspect behavior before you commit your changes
 
 ## Help needed
 
