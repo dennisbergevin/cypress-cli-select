@@ -143,7 +143,7 @@ npx cypress-cli-select run --print-selected
 
 ## Submit focused
 
-When no other options are already selected, automatically select the currently focused option when pressing Enter.
+When no other options are already selected, automatically select the currently focused option with <kbd>Enter</kbd>.
 
 To enable this feature, pass the following flag:
 
