@@ -3,6 +3,7 @@ const { defineConfig } = require("cypress");
 module.exports = defineConfig({
   e2e: {
     trashAssetsBeforeRuns: false,
+    specPattern: "./cypress/e2e/1-getting-started/",
     setupNodeEvents(on, config) {
       // on("before:run", (details) => {
       //   console.log(details);
