@@ -24,7 +24,6 @@ Cypress interactive cli prompts to select and run specs, tests or tags.
   - [Keyboard controls](#keyboard-controls)
 - [Print selected](#print-selected)
 - [Submit focused](#submit-focused)
-- [Test diff output](#test-diff-output)
 - [Using a custom cypress config](#using-a-custom-cypress-config)
 - [Setting up a `npm` script](#setting-up-a-npm-script)
 - [Typescript support](#typescript-support)
@@ -150,16 +149,6 @@ To enable this feature, pass the following flag:
 ```bash
 npx cypress-cli-select run --submit-focused
 ```
-
----
-
-## Test diff output
-
-At the end of the Cypress run, if the total tests in a spec file is not equal to the number of tests run from that spec file, you will see an output similar to the following:
-
-![Cypress diff output demo](./assets/output-demo.png)
-
-**Note**: Apart from indicating a grep test filtering was performed on a given spec during the Cypress run, this output is particularly helpful in detecting `.only()`.
 
 ---
 

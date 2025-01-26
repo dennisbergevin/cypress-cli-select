@@ -181,7 +181,7 @@ async function runSelectedSpecs() {
       // Prompt for use to select test titles or tags option
       const titleOrTagPrompt = await select({
         message: "Choose to filter by specific test titles or tags: ",
-        clearInputWhenSelected: true,
+        multiple: false,
         selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
         options: [
           {
@@ -313,7 +313,7 @@ async function runSelectedSpecs() {
             if (element.length === 2) {
               const spec = {
                 spec: element.shift(),
-                parent: element.pop(),
+                test: element.pop(),
               };
               arr.push(spec);
             } else {
@@ -369,6 +369,23 @@ async function runSelectedSpecs() {
           },
         });
 
+        // find any tests that aren't selected but include selected
+        // filter to an array where we can invert grep to not run
+        const allTests = separateStringJson();
+        const testsToInvert = [];
+        selectedTests.forEach((test) => {
+          const testStr = test.grepString;
+          testsToInvert.push(
+            allTests
+              .filter(
+                (test) =>
+                  test.value.grepString.includes(testStr) &&
+                  test.value.grepString !== testStr,
+              )
+              .map((t) => t.value.grepString),
+          );
+        });
+
         // Format the tests selected into a string separated by colon
         // This is the test title grep string format used by @bahmutov/cy-grep package
         function formatGrepString() {
@@ -376,6 +393,9 @@ async function runSelectedSpecs() {
           selectedTests.forEach((test) => {
             testArr.push(test.printArr);
             stringedTests += `${test.grepString}; `;
+          });
+          testsToInvert.flat().forEach((test) => {
+            stringedTests += `-${test}; `;
           });
           return stringedTests.slice(0, -2);
         }
@@ -479,8 +499,13 @@ async function runSelectedSpecs() {
     }
 
     if (process.env.CY_GREP_FILTER_METHOD) {
-      process.env.CYPRESS_grepFilterSpecs = true;
-      process.env.CYPRESS_grepOmitFiltered = true;
+      if (process.env.TESTING_TYPE === "component") {
+        process.argv.push("--env");
+        process.argv.push("grepOmitFiltered=true,grepFilterSpecs=true");
+      } else {
+        process.env.CYPRESS_grepFilterSpecs = true;
+        process.env.CYPRESS_grepOmitFiltered = true;
+      }
     }
 
     // In case the user passes this option without selecting specs
@@ -498,36 +523,12 @@ async function runSelectedSpecs() {
     }
   }
 
-  const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
-  const { jsonResults } = getTests(specs);
-
   console.log("\n");
   console.log(pc.bgGreen(pc.black(pc.bold(` Running Cypress: `))));
 
   // Executing the cypress run
   const runOptions = await cypress.cli.parseRunArguments(process.argv.slice(2));
-  await cypress.run(runOptions).then((results) => {
-    results.runs.forEach((tests) => {
-      const filteredSpec = Object.fromEntries(
-        Object.entries(jsonResults).filter(
-          ([key]) => key === tests.spec.relative,
-        ),
-      );
-      if (tests.stats.tests !== Object.values(filteredSpec)[0].counts.tests) {
-        console.log("\n");
-        console.log(
-          pc.bold(
-            ` Total tests in ${tests.spec.name}: ${JSON.stringify(Object.values(filteredSpec)[0].counts.tests)} `,
-          ),
-        );
-        console.log(
-          pc.bold(
-            ` Number of ran tests in ${tests.spec.name}: ${tests.stats.tests} `,
-          ),
-        );
-      }
-    });
-  });
+  await cypress.run(runOptions);
 }
 
 runSelectedSpecs();
