@@ -57,7 +57,6 @@
 
 # Where should we write the GIF?
 Output assets/run-spec-tag.gif
-Output tests/run-spec-tag.txt
 
 # Set fontsize and width/height
 Set FontSize 20
@@ -76,11 +75,9 @@ Set WindowBarSize 60
 # Set theme 
 Set Theme "nord"
 
+Hide
 # Type a command in the terminal.
 Type@100ms "npx cypress-cli-select run"
-
-# Hide the npx loader
-Hide
 
 # Run the command
 Enter
@@ -90,7 +87,6 @@ Wait+Screen /Cypress-cli-select/
 Wait+Screen /Choose to filter by specs, specific test titles or tags/
 
 # Now restart recording
-Show
 Sleep 1s
 
 # Ensure the first prompt choices are visible on screen
@@ -98,9 +94,11 @@ Wait+Screen /Specs/
 Wait+Screen /Test titles or tags \(requires cy-grep\)/
 
 # Select all options
-Ctrl+a
+Down
+Sleep 1s
+Tab
 
-Sleep 2s
+Sleep 1s
 
 # Confirm 
 Enter
@@ -110,39 +108,12 @@ Wait+Screen /Choose to filter by specific test titles or tags/
 Wait+Screen /Test titles \(requires cy-grep\)/
 Wait+Screen /Test tags \(requires cy-grep\)/
 
-Sleep 2s
+Show
+Sleep 1s
 Down
 Sleep 1s
 
-# Select tags 
-Tab
-
-# Admire the output for a bit 
-Sleep 2s
-
 # Submit tags
-Enter
-
-# Await the spec list
-Wait+Screen /Select specs to run/
-Wait+Screen /todo\.cy\.js/
-Wait+Screen /actions\.cy\.js/
-
-Sleep 2s
-
-# Type a search in the prompt
-Type@100ms "misc"
-# Await the spec list to show search result
-Wait+Screen /misc\.cy\.js/
-
-Sleep 2s
-
-# Select spec by pressing tab 
-Tab 
-
-Sleep 2s
-
-# Confirm spec
 Enter
 
 # Await tag list
@@ -184,6 +155,7 @@ Tab
 
 Sleep 2s
 
+Hide
 # Confirm 
 Enter
 

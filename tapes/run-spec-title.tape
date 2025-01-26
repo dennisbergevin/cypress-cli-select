@@ -57,7 +57,6 @@
 
 # Where should we write the GIF?
 Output assets/run-spec-title.gif
-Output tests/run-spec-title.txt
 
 # Set fontsize and width/height
 Set FontSize 20
@@ -77,7 +76,7 @@ Set WindowBarSize 60
 Set Theme "nord"
 
 # Type a command in the terminal.
-Type@100ms "npx cypress-cli-select run"
+Type@150ms "npx cypress-cli-select run"
 
 # Hide the npx loader
 Hide
@@ -110,12 +109,6 @@ Wait+Screen /Choose to filter by specific test titles or tags/
 Wait+Screen /Test titles \(requires cy-grep\)/
 Wait+Screen /Test tags \(requires cy-grep\)/
 
-Sleep 2s
-
-# Select titles 
-Tab
-
-# Admire the output for a bit 
 Sleep 2s
 
 # Submit titles

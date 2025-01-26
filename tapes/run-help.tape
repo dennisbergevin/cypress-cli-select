@@ -58,7 +58,6 @@
 
 # Where should we write the GIF?
 Output assets/run-help.gif
-Output tests/run-help.txt
 
 # Set fontsize and width/height
 Set FontSize 20
