@@ -182,7 +182,6 @@ async function runSelectedSpecs() {
       const titleOrTagPrompt = await select({
         message: "Choose to filter by specific test titles or tags: ",
         multiple: false,
-        selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
         options: [
           {
             name: "Test titles (requires cy-grep)",
