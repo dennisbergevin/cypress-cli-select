@@ -390,9 +390,15 @@ async function runSelectedSpecs() {
         function formatGrepString() {
           let stringedTests = "";
           selectedTests.forEach((test) => {
+            // if a checked test title begins with the grep inverted '-' symbol, remove the '-'
+            if (test.grepString[0] === "-") {
+              stringedTests += `${test.grepString.slice(1)}; `;
+            } else {
+              stringedTests += `${test.grepString}; `;
+            }
             testArr.push(test.printArr);
-            stringedTests += `${test.grepString}; `;
           });
+          // if a non-checked test's title includes a checked test's title, invert grep for unchecked title
           testsToInvert.flat().forEach((test) => {
             stringedTests += `-${test}; `;
           });
