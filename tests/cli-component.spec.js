@@ -59,10 +59,8 @@ describe("component: basic input prompt flows", () => {
     expect(
       await findByText("Choose to filter by specific test titles or tags"),
     ).toBeInTheConsole();
-    expect(
-      await findByText("Test titles (requires cy-grep)"),
-    ).toBeInTheConsole();
-    expect(await findByText("Test tags (requires cy-grep)")).toBeInTheConsole();
+    expect(await findByText("Test titles")).toBeInTheConsole();
+    expect(await findByText("Test tags")).toBeInTheConsole();
 
     userEvent.keyboard("[Enter]");
 
@@ -105,10 +103,8 @@ describe("component: basic input prompt flows", () => {
     expect(
       await findByText("Choose to filter by specific test titles or tags"),
     ).toBeInTheConsole();
-    expect(
-      await findByText("Test titles (requires cy-grep)"),
-    ).toBeInTheConsole();
-    expect(await findByText("Test tags (requires cy-grep)")).toBeInTheConsole();
+    expect(await findByText("Test titles")).toBeInTheConsole();
+    expect(await findByText("Test tags")).toBeInTheConsole();
 
     userEvent.keyboard("[ArrowDown]");
     userEvent.keyboard("[Enter]");
@@ -116,7 +112,9 @@ describe("component: basic input prompt flows", () => {
     expect(await findByText("Select tags to run")).toBeInTheConsole();
     expect(await findByText("@p3")).toBeInTheConsole();
 
+    userEvent.keyboard("[ArrowDown]");
     userEvent.keyboard("[Enter]");
+
     expect(await findByText("Select tags to run: @p3"));
     expect(await findByText("Running Cypress")).toBeInTheConsole();
   });
@@ -181,10 +179,8 @@ describe("component: print selected displays prior to run", () => {
     expect(
       await findByText("Choose to filter by specific test titles or tags"),
     ).toBeInTheConsole();
-    expect(
-      await findByText("Test titles (requires cy-grep)"),
-    ).toBeInTheConsole();
-    expect(await findByText("Test tags (requires cy-grep)")).toBeInTheConsole();
+    expect(await findByText("Test titles")).toBeInTheConsole();
+    expect(await findByText("Test tags")).toBeInTheConsole();
 
     userEvent.keyboard("[Enter]");
 
@@ -230,10 +226,8 @@ describe("component: print selected displays prior to run", () => {
     expect(
       await findByText("Choose to filter by specific test titles or tags"),
     ).toBeInTheConsole();
-    expect(
-      await findByText("Test titles (requires cy-grep)"),
-    ).toBeInTheConsole();
-    expect(await findByText("Test tags (requires cy-grep)")).toBeInTheConsole();
+    expect(await findByText("Test titles")).toBeInTheConsole();
+    expect(await findByText("Test tags")).toBeInTheConsole();
 
     userEvent.keyboard("[ArrowDown]");
     userEvent.keyboard("[Enter]");
@@ -267,7 +261,7 @@ describe("component: handles choose spec pattern prompt", () => {
 
     expect(await findByText("Specs")).toBeInTheConsole();
     expect(
-      await findByText("Test titles or tags (requires cy-grep)"),
+      await findByText("Test titles or tags (requires cy-grep) (disabled)"),
     ).toBeInTheConsole();
 
     userEvent.keyboard("[Enter]");

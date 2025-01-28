@@ -102,17 +102,29 @@ const suitesTests = (justTags) => {
 };
 
 async function runSelectedSpecs() {
+  // allow user to pass --config-file and set as CYPRESS_CONFIG_FILE env variable
+  // this is used by find-cypress-specs package to know which config to read specPattern from
   if (process.argv.includes("--config-file")) {
     const index = process.argv.indexOf("--config-file");
     process.env.CYPRESS_CONFIG_FILE = process.argv[index + 1];
   }
 
+  // allows the user to simply hit Enter key to submit prompt when no choice has been selected
   if (process.argv.includes("--submit-focused")) {
     findAndRemoveArgv("--submit-focused");
     process.env.SUBMIT_FOCUSED = true;
   }
 
+  // set the testing type
+  // this is used by find-cypress-specs package to get the appropriate spec list
+  if (process.argv.includes("--component")) {
+    process.env.TESTING_TYPE = "component";
+  } else {
+    process.env.TESTING_TYPE = "e2e";
+  }
+
   try {
+    // help menu options
     yarg
       .completion("--print-selected", false)
       .option("print-selected", {
@@ -146,17 +158,26 @@ async function runSelectedSpecs() {
       .example("npx cypress-cli-select run --browser=firefox")
       .help().argv;
 
-    if (process.argv.includes("--component")) {
-      process.env.TESTING_TYPE = "component";
-    } else {
-      process.env.TESTING_TYPE = "e2e";
-    }
-
     // Cypress-cli-select title
     console.log("\n");
     console.log(pc.bgGreen(pc.black(pc.bold(` Cypress-cli-select `))));
     console.log("\n");
 
+    // NOTE:
+    // if --component and --choose-spec-pattern then disable test title and tag prompt
+    // this is because setting the component specpattern via --config does not allow for grepping on top
+    let disableTitleTagChoice = false;
+    if (
+      process.env.TESTING_TYPE === "component" &&
+      process.argv.includes("--choose-spec-pattern")
+    ) {
+      disableTitleTagChoice = true;
+    }
+
+    /*
+     * NOTE:: Choose specs, test titles/tags or both
+     * Test titles/tags requires the cy-grep package
+     */
     // Prompt for use to select spec and test titles or tags option
     const specAndTestPrompt = await select({
       message: "Choose to filter by specs, specific test titles or tags: ",
@@ -172,11 +193,16 @@ async function runSelectedSpecs() {
         {
           name: "Test titles or tags (requires cy-grep)",
           value: "Tests or tags",
+          disabled: disableTitleTagChoice,
         },
       ],
       required: true,
     });
 
+    /*
+     * NOTE:: Choose test titles or tags
+     * This requires the cy-grep package
+     */
     if (specAndTestPrompt.includes("Tests or tags")) {
       // Prompt for use to select test titles or tags option
       const titleOrTagPrompt = await select({
@@ -184,11 +210,11 @@ async function runSelectedSpecs() {
         multiple: false,
         options: [
           {
-            name: "Test titles (requires cy-grep)",
+            name: "Test titles",
             value: "Titles",
           },
           {
-            name: "Test tags (requires cy-grep)",
+            name: "Test tags",
             value: "Tags",
           },
         ],
@@ -196,12 +222,14 @@ async function runSelectedSpecs() {
       });
       process.env.CY_GREP_FILTER_METHOD = titleOrTagPrompt;
     }
-
     // Arrays for storing specs and/or tests
     // If user passes --print-selected
     const specArr = [];
     const testArr = [];
 
+    /*
+     * NOTE:: Spec section
+     */
     if (specAndTestPrompt.includes("Specs")) {
       const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
@@ -246,6 +274,10 @@ async function runSelectedSpecs() {
           specArr.push(`${spec}`);
         });
 
+        /*
+         * NOTE:: specPattern section for reordering specs
+         * requires --choose-spec-pattern flag be passed
+         */
         if (process.argv.includes("--choose-spec-pattern")) {
           findAndRemoveArgv("--choose-spec-pattern");
           const sortedSpecResult = await sortingList({
@@ -301,6 +333,9 @@ async function runSelectedSpecs() {
       }
     }
 
+    /*
+     * NOTE:: Test Title section
+     */
     if (process.env.CY_GREP_FILTER_METHOD === "Titles") {
       const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
@@ -357,6 +392,7 @@ async function runSelectedSpecs() {
 
             const fuse = new Fuse(tests, {
               keys: ["name"],
+              ignoreLocation: true,
             });
 
             if (!input) return tests;
@@ -418,11 +454,17 @@ async function runSelectedSpecs() {
       }
     }
 
+    /*
+     * NOTE:: Tags section
+     */
     if (process.env.CY_GREP_FILTER_METHOD === "Tags") {
       const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
       if (specs.length > 0) {
         const allTags = suitesTests(true);
+        // sort the tags presented
+        allTags.sort();
+
         if (allTags.length > 0) {
           const separateStringJson = () => {
             let arr = [];
@@ -481,6 +523,7 @@ async function runSelectedSpecs() {
       }
     }
 
+    // NOTE : --print-selected used to show all selected specs/titles/tags
     if (process.argv.includes("--print-selected")) {
       findAndRemoveArgv("--print-selected");
       if (specAndTestPrompt.includes("Specs")) {
@@ -503,14 +546,11 @@ async function runSelectedSpecs() {
       }
     }
 
+    // both env variables are from cy-grep package
+    // used to omit tests and specs that are filtered
     if (process.env.CY_GREP_FILTER_METHOD) {
-      if (process.env.TESTING_TYPE === "component") {
-        process.argv.push("--env");
-        process.argv.push("grepOmitFiltered=true,grepFilterSpecs=true");
-      } else {
-        process.env.CYPRESS_grepFilterSpecs = true;
-        process.env.CYPRESS_grepOmitFiltered = true;
-      }
+      process.env.CYPRESS_grepFilterSpecs = true;
+      process.env.CYPRESS_grepOmitFiltered = true;
     }
 
     // In case the user passes this option without selecting specs
@@ -518,6 +558,7 @@ async function runSelectedSpecs() {
       findAndRemoveArgv("--choose-spec-pattern");
     }
   } catch (e) {
+    // if user closes prompt send a error message instead of inquirer.js error
     if (e.message.includes("User force closed the prompt")) {
       console.log("\n");
       console.log(pc.redBright(pc.bold("The prompt was closed")));

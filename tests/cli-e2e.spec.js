@@ -61,10 +61,8 @@ describe("e2e: basic input prompt flows", () => {
     expect(
       await findByText("Choose to filter by specific test titles or tags"),
     ).toBeInTheConsole();
-    expect(
-      await findByText("Test titles (requires cy-grep)"),
-    ).toBeInTheConsole();
-    expect(await findByText("Test tags (requires cy-grep)")).toBeInTheConsole();
+    expect(await findByText("Test titles")).toBeInTheConsole();
+    expect(await findByText("Test tags")).toBeInTheConsole();
 
     userEvent.keyboard("[Enter]");
 
@@ -102,10 +100,8 @@ describe("e2e: basic input prompt flows", () => {
     expect(
       await findByText("Choose to filter by specific test titles or tags"),
     ).toBeInTheConsole();
-    expect(
-      await findByText("Test titles (requires cy-grep)"),
-    ).toBeInTheConsole();
-    expect(await findByText("Test tags (requires cy-grep)")).toBeInTheConsole();
+    expect(await findByText("Test titles")).toBeInTheConsole();
+    expect(await findByText("Test tags")).toBeInTheConsole();
 
     userEvent.keyboard("[ArrowDown]");
     userEvent.keyboard("[Enter]");
@@ -182,10 +178,8 @@ describe("e2e: print selected displays prior to run", () => {
     expect(
       await findByText("Choose to filter by specific test titles or tags"),
     ).toBeInTheConsole();
-    expect(
-      await findByText("Test titles (requires cy-grep)"),
-    ).toBeInTheConsole();
-    expect(await findByText("Test tags (requires cy-grep)")).toBeInTheConsole();
+    expect(await findByText("Test titles")).toBeInTheConsole();
+    expect(await findByText("Test tags")).toBeInTheConsole();
 
     userEvent.keyboard("[Enter]");
 
@@ -233,10 +227,8 @@ describe("e2e: print selected displays prior to run", () => {
     expect(
       await findByText("Choose to filter by specific test titles or tags"),
     ).toBeInTheConsole();
-    expect(
-      await findByText("Test titles (requires cy-grep)"),
-    ).toBeInTheConsole();
-    expect(await findByText("Test tags (requires cy-grep)")).toBeInTheConsole();
+    expect(await findByText("Test titles")).toBeInTheConsole();
+    expect(await findByText("Test tags")).toBeInTheConsole();
 
     userEvent.keyboard("[ArrowDown]");
     userEvent.keyboard("[Enter]");
