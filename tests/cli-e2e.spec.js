@@ -261,7 +261,7 @@ describe("e2e: handles choose spec pattern prompt", () => {
 
     expect(await findByText("Specs")).toBeInTheConsole();
     expect(
-      await findByText("Test titles or tags (requires cy-grep)"),
+      await findByText("Test titles or tags (requires cy-grep) (disabled)"),
     ).toBeInTheConsole();
 
     userEvent.keyboard("[Enter]");

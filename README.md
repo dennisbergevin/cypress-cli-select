@@ -114,7 +114,7 @@ If you are interested in running selected specs in a specific order, pass the fo
 npx cypress-cli-select run --choose-spec-pattern
 ```
 
-**Note**: If you pass the `--component` flag with `--choose-spec-pattern` you will not have the choice to run test titles or tags.
+**Note**: If you pass `--choose-spec-pattern` you will not have the choice to run test titles or tags.
 
 ### Keyboard controls
 

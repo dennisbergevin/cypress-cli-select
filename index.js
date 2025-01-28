@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { getSpecs, getTests } = require("find-cypress-specs");
+const { getSpecs } = require("find-cypress-specs");
 const cypress = require("cypress");
 const Fuse = require("fuse.js");
 const { select } = require("inquirer-select-pro");
@@ -163,14 +163,9 @@ async function runSelectedSpecs() {
     console.log(pc.bgGreen(pc.black(pc.bold(` Cypress-cli-select `))));
     console.log("\n");
 
-    // NOTE:
-    // if --component and --choose-spec-pattern then disable test title and tag prompt
-    // this is because setting the component specpattern via --config does not allow for grepping on top
+    // NOTE:: if --choose-spec-pattern then disable test title and tag prompt
     let disableTitleTagChoice = false;
-    if (
-      process.env.TESTING_TYPE === "component" &&
-      process.argv.includes("--choose-spec-pattern")
-    ) {
+    if (process.argv.includes("--choose-spec-pattern")) {
       disableTitleTagChoice = true;
     }
 
