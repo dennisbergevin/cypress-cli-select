@@ -176,7 +176,8 @@ async function runSelectedSpecs() {
     // Prompt for use to select spec and test titles or tags option
     const specAndTestPrompt = await select({
       message: "Choose to filter by specs, specific test titles or tags: ",
-      multiple: true,
+      multiple: disableTitleTagChoice ? false : true,
+      defaultValue: disableTitleTagChoice ? "Specs" : null,
       clearInputWhenSelected: true,
       selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
       canToggleAll: true,
@@ -193,6 +194,8 @@ async function runSelectedSpecs() {
       ],
       required: true,
     });
+
+    /*
 
     /*
      * NOTE:: Choose test titles or tags

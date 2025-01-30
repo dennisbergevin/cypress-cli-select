@@ -16,6 +16,8 @@ Cypress interactive cli prompts to select and run specs, tests or tags.
 #### Table of Contents
 
 - [Installation](#installation)
+  - [@bahmutov/cy-grep](#@bahmutov/cy-grep)
+  - [@cypress/grep](#@cypress/grep)
 - [Run mode](#run-mode)
   - [Keyboard controls](#keyboard-controls)
 - [Test titles or tags](#test-titles-or-tags)
@@ -39,13 +41,19 @@ Cypress interactive cli prompts to select and run specs, tests or tags.
 npm install --save-dev cypress-cli-select
 ```
 
-In order to run specific tests by their title, install the following plugin:
+### `@bahmutov/cy-grep`
+
+In order to run specific tests by their title or tag, install the following plugin:
 
 ```sh
 npm install --save-dev @bahmutov/cy-grep
 ```
 
 Follow the installation and setup for `@bahmutov/cy-grep` in the project [README](https://github.com/bahmutov/cy-grep)
+
+### `@cypress/grep`
+
+If you use `@cypress/grep`, you can use this package for specs **or** tag selection, but this package uses functionality not currently supported by `@cypress/grep` to allow for other uses.
 
 ---
 
