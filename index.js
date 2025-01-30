@@ -366,10 +366,7 @@ async function runSelectedSpecs() {
             const { spec, ...specLess } = element;
             const choices = {
               name: Object.values(element).flat().join(" > "),
-              value: {
-                grepString: Object.values(specLess).flat().join(" "),
-                printArr: element,
-              },
+              value: Object.values(specLess).flat().join(" "),
             };
             arr.push(choices);
           });
@@ -399,20 +396,32 @@ async function runSelectedSpecs() {
           },
         });
 
+        // for --print-selected
+        // to couple selected choice back to all tests in json format
+        const originalTests = testChoices();
+        originalTests.forEach((originalTest) => {
+          const { spec, ...specLess } = originalTest;
+          const value = Object.values(specLess).flat().join(" ");
+          selectedTests.forEach((test) => {
+            if (test === value) {
+              testArr.push(originalTest);
+            }
+          });
+        });
+
         // find any tests that aren't selected but include selected
         // filter to an array where we can invert grep to not run
         const allTests = separateStringJson();
         const testsToInvert = [];
         selectedTests.forEach((test) => {
-          const testStr = test.grepString;
+          const testStr = test;
           testsToInvert.push(
             allTests
               .filter(
                 (test) =>
-                  test.value.grepString.includes(testStr) &&
-                  test.value.grepString !== testStr,
+                  test.value.includes(testStr) && test.value !== testStr,
               )
-              .map((t) => t.value.grepString),
+              .map((t) => t.value),
           );
         });
 
@@ -422,12 +431,11 @@ async function runSelectedSpecs() {
           let stringedTests = "";
           selectedTests.forEach((test) => {
             // if a checked test title begins with the grep inverted '-' symbol, remove the '-'
-            if (test.grepString[0] === "-") {
-              stringedTests += `${test.grepString.slice(1)}; `;
+            if (test[0] === "-") {
+              stringedTests += `${test.slice(1)}; `;
             } else {
-              stringedTests += `${test.grepString}; `;
+              stringedTests += `${test}; `;
             }
-            testArr.push(test.printArr);
           });
           // if a non-checked test's title includes a checked test's title, invert grep for unchecked title
           testsToInvert.flat().forEach((test) => {
