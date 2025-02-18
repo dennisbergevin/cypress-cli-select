@@ -6,7 +6,7 @@
 Cypress interactive cli prompts to select and run specs, tests or tags.
 </p>
 
-<img src="./assets/run-spec-title.gif" alt="Cypress-cli-select demo" loop=infinite>
+![Cypress-cli-select title demo](https://vhs.charm.sh/vhs-4IXigecxVDqJ1jqTiKID8k.gif)
 
 ## Features
 
@@ -98,7 +98,7 @@ npx cypress-cli-select run --component --browser=chrome
 
 If [@bahmutov/cy-grep](https://github.com/bahmutov/cy-grep) package is installed in your project, test titles and tags are available to select.
 
-<img src="./assets/run-spec-tag.gif" alt="Cypress-cli-select tag selection" loop=infinite>
+![Cypress-cli-select tag demo](https://vhs.charm.sh/vhs-1cBa8rxnio9AWN8NfTHyT8.gif)
 
 ---
 
@@ -110,7 +110,7 @@ To open the cli help menu, pass the `--help` flag:
 npx cypress-cli-select run --help
 ```
 
-<img src="./assets/run-help.gif" alt="Cypress-cli-select help menu" loop=infinite>
+## ![Cypress-cli-select help menu demo](https://vhs.charm.sh/vhs-1TbXR4wdsPSpS5tHYb1MYT.gif)
 
 ---
 
@@ -134,7 +134,7 @@ npx cypress-cli-select run --choose-spec-pattern
 | <kbd>Shift</kbd> + <kbd>⬇</kbd> |      Reorder current down       |
 |         <kbd>Enter</kbd>         |          Confirm order          |
 
-<img src="./assets/choose-spec-pattern-demo.gif" alt="Cypress-cli-select choose-spec-pattern demo" loop=infinite>
+## ![Cypress-cli-select choose-spec-pattern demo](https://vhs.charm.sh/vhs-7iM6ixkI7qO1dmFziW1c3D.gif)
 
 ---
 
