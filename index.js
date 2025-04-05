@@ -115,6 +115,29 @@ async function runSelectedSpecs() {
     process.env.SUBMIT_FOCUSED = true;
   }
 
+  if (process.argv.includes("--titles") && process.argv.includes("--tags")) {
+    console.log("\n");
+    console.log(pc.redBright(pc.bold(` Cannot choose both titles and tags `)));
+    process.exit();
+  }
+
+  if (process.argv.includes("--titles")) {
+    findAndRemoveArgv("--titles");
+    process.env.TEST_TITLES = true;
+    process.env.CY_GREP_FILTER_METHOD = "Titles";
+  }
+
+  if (process.argv.includes("--specs")) {
+    findAndRemoveArgv("--specs");
+    process.env.TEST_SPECS = true;
+  }
+
+  if (process.argv.includes("--tags")) {
+    findAndRemoveArgv("--tags");
+    process.env.TEST_TAGS = true;
+    process.env.CY_GREP_FILTER_METHOD = "Tags";
+  }
+
   // set the testing type
   // this is used by find-cypress-specs package to get the appropriate spec list
   if (process.argv.includes("--component")) {
@@ -125,6 +148,30 @@ async function runSelectedSpecs() {
 
   try {
     // help menu options
+    yarg
+      .completion("--specs", false)
+      .option("specs", {
+        desc: "Skips to spec selection prompt",
+        type: "boolean",
+      })
+      .example("npx cypress-cli-select run --specs");
+
+    yarg
+      .completion("--titles", false)
+      .option("titles", {
+        desc: "Skips to test title selection prompt",
+        type: "boolean",
+      })
+      .example("npx cypress-cli-select run --titles");
+
+    yarg
+      .completion("--tags", false)
+      .option("tags", {
+        desc: "Skips to tag selection prompt",
+        type: "boolean",
+      })
+      .example("npx cypress-cli-select run --tags");
+
     yarg
       .completion("--print-selected", false)
       .option("print-selected", {
@@ -174,51 +221,66 @@ async function runSelectedSpecs() {
      * Test titles/tags requires the cy-grep package
      */
     // Prompt for use to select spec and test titles or tags option
-    const specAndTestPrompt = await select({
-      message: "Choose to filter by specs, specific test titles or tags: ",
-      multiple: disableTitleTagChoice ? false : true,
-      defaultValue: disableTitleTagChoice ? "Specs" : null,
-      clearInputWhenSelected: true,
-      selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
-      canToggleAll: true,
-      options: [
-        {
-          name: "Specs",
-          value: "Specs",
-        },
-        {
-          name: "Test titles or tags (requires cy-grep)",
-          value: "Tests or tags",
-          disabled: disableTitleTagChoice,
-        },
-      ],
-      required: true,
-    });
+    if (
+      !process.env.TEST_TITLES &&
+      !process.env.TEST_SPECS &&
+      !process.env.TEST_TAGS
+    ) {
+      const specAndTestPrompt = await select({
+        message: "Choose to filter by specs, specific test titles or tags: ",
+        multiple: disableTitleTagChoice ? false : true,
+        defaultValue: disableTitleTagChoice ? "Specs" : null,
+        clearInputWhenSelected: true,
+        selectFocusedOnSubmit: process.env.SUBMIT_FOCUSED,
+        canToggleAll: true,
+        options: [
+          {
+            name: "Specs",
+            value: "Specs",
+          },
+          {
+            name: "Test titles or tags (requires cy-grep)",
+            value: "Tests or tags",
+            disabled: disableTitleTagChoice,
+          },
+        ],
+        required: true,
+      });
+      if (specAndTestPrompt.includes("Specs")) {
+        process.env.TEST_SPECS = true;
+      }
 
-    /*
+      /*
 
     /*
      * NOTE:: Choose test titles or tags
      * This requires the cy-grep package
      */
-    if (specAndTestPrompt.includes("Tests or tags")) {
-      // Prompt for use to select test titles or tags option
-      const titleOrTagPrompt = await select({
-        message: "Choose to filter by specific test titles or tags: ",
-        multiple: false,
-        options: [
-          {
-            name: "Test titles",
-            value: "Titles",
-          },
-          {
-            name: "Test tags",
-            value: "Tags",
-          },
-        ],
-        required: true,
-      });
-      process.env.CY_GREP_FILTER_METHOD = titleOrTagPrompt;
+      if (specAndTestPrompt.includes("Tests or tags")) {
+        // Prompt for use to select test titles or tags option
+        const titleOrTagPrompt = await select({
+          message: "Choose to filter by specific test titles or tags: ",
+          multiple: false,
+          options: [
+            {
+              name: "Test titles",
+              value: "Titles",
+            },
+            {
+              name: "Test tags",
+              value: "Tags",
+            },
+          ],
+          required: true,
+        });
+        process.env.CY_GREP_FILTER_METHOD = titleOrTagPrompt;
+        if (titleOrTagPrompt.includes("Titles")) {
+          process.env.TEST_TITLES = true;
+        }
+        if (titleOrTagPrompt.includes("Tags")) {
+          process.env.TEST_TAGS = true;
+        }
+      }
     }
     // Arrays for storing specs and/or tests
     // If user passes --print-selected
@@ -228,7 +290,7 @@ async function runSelectedSpecs() {
     /*
      * NOTE:: Spec section
      */
-    if (specAndTestPrompt.includes("Specs")) {
+    if (process.env.TEST_SPECS) {
       const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
       if (specs.length > 0) {
@@ -334,7 +396,7 @@ async function runSelectedSpecs() {
     /*
      * NOTE:: Test Title section
      */
-    if (process.env.CY_GREP_FILTER_METHOD === "Titles") {
+    if (process.env.TEST_TITLES) {
       const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
       if (specs.length > 0) {
@@ -463,7 +525,7 @@ async function runSelectedSpecs() {
     /*
      * NOTE:: Tags section
      */
-    if (process.env.CY_GREP_FILTER_METHOD === "Tags") {
+    if (process.env.TEST_TAGS) {
       const specs = getSpecs(undefined, process.env.TESTING_TYPE, false);
 
       if (specs.length > 0) {
@@ -532,19 +594,19 @@ async function runSelectedSpecs() {
     // NOTE : --print-selected used to show all selected specs/titles/tags
     if (process.argv.includes("--print-selected")) {
       findAndRemoveArgv("--print-selected");
-      if (specAndTestPrompt.includes("Specs")) {
+      if (process.env.TEST_SPECS) {
         console.log("\n");
         console.log(pc.bgGreen(pc.black(pc.bold(` Spec(s) selected: `))));
         console.log("\n");
         console.log(specArr);
       }
-      if (process.env.CY_GREP_FILTER_METHOD === "Titles") {
+      if (process.env.TEST_TITLES) {
         console.log("\n");
         console.log(pc.bgGreen(pc.black(pc.bold(` Test(s) selected: `))));
         console.log("\n");
         console.log(testArr);
       }
-      if (process.env.CY_GREP_FILTER_METHOD === "Tags") {
+      if (process.env.TEST_TAGS) {
         console.log("\n");
         console.log(pc.bgGreen(pc.black(pc.bold(` Tag(s) selected: `))));
         console.log("\n");

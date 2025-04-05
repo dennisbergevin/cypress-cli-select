@@ -71,6 +71,35 @@ For selecting component specs:
 npx cypress-cli-select run --component
 ```
 
+If you want to skip straight to selecting specs, titles or tags:
+
+```bash
+npx cypress-cli-select run --specs
+# skips straight to spec selection
+```
+
+```bash
+npx cypress-cli-select run --titles
+# skips to test title selection
+```
+
+```bash
+npx cypress-cli-select run --tags
+# skips to tag selection
+```
+
+```bash
+npx cypress-cli-select run --specs --tags
+# skips to spec selection, followed by tag selection
+```
+
+```bash
+npx cypress-cli-select run --specs --titles
+# skips to spec selection, followed by title selection
+```
+
+**Note**: You cannot pass both the `--titles` and `--tags` arguments.
+
 You can also include more cli arguments similar to `cypress run`, as the command harnesses the power of [Cypress module API](https://docs.cypress.io/guides/guides/module-api):
 
 ```bash

@@ -114,6 +114,75 @@ describe("e2e: basic input prompt flows", () => {
   });
 });
 
+describe("e2e: prompt flags skip beginning prompts", () => {
+  it("handles --specs flag", async () => {
+    const { findByText, userEvent } = await render("cd ../../../ && node", [
+      resolve(__dirname, "../index.js"),
+      ["--submit-focused"],
+      ["--specs"],
+    ]);
+
+    expect(await findByText("Select specs to run")).toBeInTheConsole();
+    expect(
+      await findByText("cypress/e2e/1-getting-started/todo.cy.js"),
+    ).toBeInTheConsole();
+    expect(
+      await findByText("cypress/e2e/2-advanced-examples/actions.cy.js"),
+    ).toBeInTheConsole();
+    expect(
+      await findByText("cypress/e2e/2-advanced-examples/aliasing.cy.js"),
+    ).toBeInTheConsole();
+
+    userEvent.keyboard("[Enter]");
+    expect(await findByText("Running Cypress")).toBeInTheConsole();
+  });
+
+  it("handles --titles flag", async () => {
+    const { findByText, userEvent } = await render("cd ../../../ && node", [
+      resolve(__dirname, "../index.js"),
+      ["--submit-focused"],
+      ["--titles"],
+    ]);
+
+    expect(await findByText("Select tests to run")).toBeInTheConsole();
+    expect(
+      await findByText(
+        "todo.cy.js > example to-do app > displays two todo items by default",
+      ),
+    ).toBeInTheConsole();
+
+    userEvent.keyboard("[Enter]");
+    expect(await findByText("Running Cypress")).toBeInTheConsole();
+  });
+
+  it("handles --tags flag", async () => {
+    const { findByText, userEvent } = await render("cd ../../../ && node", [
+      resolve(__dirname, "../index.js"),
+      ["--submit-focused"],
+      ["--tags"],
+    ]);
+
+    expect(await findByText("Select tags to run")).toBeInTheConsole();
+    expect(await findByText("@smoke")).toBeInTheConsole();
+
+    userEvent.keyboard("[Enter]");
+    expect(await findByText("Running Cypress")).toBeInTheConsole();
+  });
+
+  it("cannot pass both --titles and --tags", async () => {
+    const { findByText, userEvent } = await render("cd ../../../ && node", [
+      resolve(__dirname, "../index.js"),
+      ["--submit-focused"],
+      ["--titles"],
+      ["--tags"],
+    ]);
+
+    expect(
+      await findByText("Cannot choose both titles and tags"),
+    ).toBeInTheConsole();
+  });
+});
+
 describe("e2e: print selected displays prior to run", () => {
   it("handles spec display", async () => {
     const { findByText, userEvent } = await render("cd ../../../ && node", [
