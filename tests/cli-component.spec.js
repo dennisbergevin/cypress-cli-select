@@ -120,6 +120,82 @@ describe("component: basic input prompt flows", () => {
   });
 });
 
+describe("component: prompt flags skip beginning prompts", () => {
+  it("handles --specs flag", async () => {
+    const { findByText, userEvent } = await render("cd ../../../ && node", [
+      resolve(__dirname, "../index.js"),
+      ["--submit-focused"],
+      ["--component"],
+      ["--specs"],
+    ]);
+
+    expect(await findByText("Select specs to run")).toBeInTheConsole();
+    expect(await findByText("src/components/Clock.cy.js")).toBeInTheConsole();
+    expect(await findByText("src/components/Stepper.cy.js")).toBeInTheConsole();
+
+    userEvent.keyboard("[Enter]");
+    expect(
+      await findByText("Select specs to run: src/components/Clock.cy.js"),
+    ).toBeInTheConsole();
+    expect(await findByText("Running Cypress")).toBeInTheConsole();
+  });
+
+  it("handles --titles flag", async () => {
+    const { findByText, userEvent } = await render("cd ../../../ && node", [
+      resolve(__dirname, "../index.js"),
+      ["--submit-focused"],
+      ["--component"],
+      ["--titles"],
+    ]);
+
+    expect(await findByText("Select tests to run")).toBeInTheConsole();
+    expect(
+      await findByText("Clock.cy.js > <Clock> > mounts"),
+    ).toBeInTheConsole();
+    expect(
+      await findByText("Stepper.cy.js > <Stepper> > mounts"),
+    ).toBeInTheConsole();
+
+    userEvent.keyboard("[Enter]");
+    expect(
+      await findByText("Select tests to run: Clock.cy.js > <Clock> > mounts"),
+    );
+    expect(await findByText("Running Cypress")).toBeInTheConsole();
+  });
+
+  it("handles --tags flag", async () => {
+    const { findByText, userEvent } = await render("cd ../../../ && node", [
+      resolve(__dirname, "../index.js"),
+      ["--submit-focused"],
+      ["--component"],
+      ["--tags"],
+    ]);
+
+    expect(await findByText("Select tags to run")).toBeInTheConsole();
+    expect(await findByText("@p3")).toBeInTheConsole();
+
+    userEvent.keyboard("[ArrowDown]");
+    userEvent.keyboard("[Enter]");
+
+    expect(await findByText("Select tags to run: @p3"));
+    expect(await findByText("Running Cypress")).toBeInTheConsole();
+  });
+
+  it("cannot pass both --titles and --tags", async () => {
+    const { findByText, userEvent } = await render("cd ../../../ && node", [
+      resolve(__dirname, "../index.js"),
+      ["--submit-focused"],
+      ["--component"],
+      ["--titles"],
+      ["--tags"],
+    ]);
+
+    expect(
+      await findByText("Cannot choose both titles and tags"),
+    ).toBeInTheConsole();
+  });
+});
+
 describe("component: print selected displays prior to run", () => {
   it("handles spec display", async () => {
     const { findByText, userEvent } = await render("cd ../../../ && node", [

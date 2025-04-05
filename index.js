@@ -115,6 +115,12 @@ async function runSelectedSpecs() {
     process.env.SUBMIT_FOCUSED = true;
   }
 
+  if (process.argv.includes("--titles") && process.argv.includes("--tags")) {
+    console.log("\n");
+    console.log(pc.redBright(pc.bold(` Cannot choose both titles and tags `)));
+    process.exit();
+  }
+
   if (process.argv.includes("--titles")) {
     findAndRemoveArgv("--titles");
     process.env.TEST_TITLES = true;
