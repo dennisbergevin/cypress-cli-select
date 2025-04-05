@@ -4,9 +4,6 @@ module.exports = defineConfig({
   e2e: {
     trashAssetsBeforeRuns: false,
     setupNodeEvents(on, config) {
-      // on("before:run", (details) => {
-      //   console.log(details);
-      // });
       require("@bahmutov/cy-grep/src/plugin")(config);
       on("task", {
         log(message) {
