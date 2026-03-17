@@ -1,11 +1,12 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
+    allowCypressEnv: false,
     trashAssetsBeforeRuns: false,
     setupNodeEvents(on, config) {
-      require("@bahmutov/cy-grep/src/plugin")(config);
-      on("task", {
+      require('@bahmutov/cy-grep/src/plugin')(config);
+      on('task', {
         log(message) {
           console.log(message);
           return null;
@@ -17,6 +18,6 @@ module.exports = defineConfig({
   },
 
   component: {
-    specPattern: "./src/components/",
+    specPattern: './src/components/',
   },
 });
