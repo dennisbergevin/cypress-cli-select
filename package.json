@@ -1,6 +1,6 @@
 {
   "name": "cypress-cli-select",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A Cypress cli prompt to select and run specs, tests or tags",
   "main": "index.js",
   "bin": {
@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "cli-testing-library": "^2.0.2",
-    "cypress": "^15.12.0",
+    "cypress": "^15.13.0",
     "jest": "^29.7.0"
   },
   "keywords": [
@@ -34,7 +34,7 @@
   },
   "homepage": "https://github.com/dennisbergevin/cypress-cli-select#readme",
   "dependencies": {
-    "@bahmutov/cy-grep": "^3.0.1",
+    "@bahmutov/cy-grep": "^3.0.3",
     "@inquirer/core": "^10.1.11",
     "find-cypress-specs": "^1.54.10",
     "find-test-names": "^1.29.19",
