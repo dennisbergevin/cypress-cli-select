@@ -1,13 +1,13 @@
 {
   "name": "cypress-cli-select",
-  "version": "2.0.6",
+  "version": "2.0.7",
   "description": "A Cypress cli prompt to select and run specs, tests or tags",
   "main": "index.js",
   "bin": {
     "cypress-cli-select": "index.js"
   },
   "devDependencies": {
-    "cypress": "^15.17.0"
+    "cypress": "^15.18.1"
   },
   "keywords": [
     "cypress",
