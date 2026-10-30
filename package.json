@@ -1,6 +1,6 @@
 {
   "name": "cypress-cli-select",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A Cypress cli prompt to select and run specs, tests or tags",
   "main": "index.js",
   "bin": {
@@ -31,7 +31,7 @@
   "dependencies": {
     "@bahmutov/cy-grep": "^3.0.5",
     "@inquirer/core": "^10.1.11",
-    "find-cypress-specs": "^1.54.12",
+    "find-cypress-specs": "^1.54.13",
     "find-test-names": "^1.29.19",
     "fuse.js": "^7.4.2",
     "inquirer-select-pro": "^1.0.0-alpha.9",

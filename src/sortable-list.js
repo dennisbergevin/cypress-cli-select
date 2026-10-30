@@ -8,18 +8,18 @@ const {
   isUpKey,
   isDownKey,
   isEnterKey,
-} = require("@inquirer/core");
-const pc = require("picocolors");
+} = require('@inquirer/core');
+const pc = require('picocolors');
 
-export const sortingList = createPrompt((config, done) => {
+const sortingList = createPrompt((config, done) => {
   const { message, choices, pageSize = 10 } = config;
   const theme = makeTheme({
-    icon: { cursor: pc.cyan(">") },
+    icon: { cursor: pc.cyan('>') },
     style: { highlight: pc.cyan },
   });
 
   const prefix = usePrefix({ theme });
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState('idle');
 
   const [items, setItems] = useState(choices);
   const [active, setActive] = useState(0);
@@ -30,7 +30,7 @@ export const sortingList = createPrompt((config, done) => {
 
   useKeypress((key) => {
     if (isEnterKey(key)) {
-      setStatus("done");
+      setStatus('done');
       done(items);
     } else if (isUpKey(key) || isDownKey(key)) {
       const offset = isUpKey(key) ? -1 : 1;
@@ -61,7 +61,7 @@ export const sortingList = createPrompt((config, done) => {
     items,
     active,
     renderItem({ item, isActive }) {
-      const cursor = isActive ? theme.icon.cursor : " ";
+      const cursor = isActive ? theme.icon.cursor : ' ';
       const color = isActive ? theme.style.highlight : (text) => text;
 
       return color(`${cursor} ${pc.bold(item)}`);
@@ -70,12 +70,12 @@ export const sortingList = createPrompt((config, done) => {
     loop: false, // Disable loop
   });
 
-  if (status === "done") {
+  if (status === 'done') {
     return `${theme.prefix.idle} ${pc.bold(message)} ${pc.cyan(items).toString()}`;
   }
   const helpermessage = `(use arrow keys to navigate, shift+up/down to reorder, enter to confirm)`;
   return `${theme.prefix.idle} ${pc.bold(message)}\n${page}\n${pc.dim(
-    helpermessage,
+    helpermessage
   )}`;
 });
 
